@@ -66,7 +66,8 @@ gem 'kaminari'
 gem 'ransack'
 gem 'cancancan'
 gem 'refile'
-gem 'ttt'
+
+gem 'devise'
 gem 'cocoon'
 
 gem 'bootstrap-sass', '~> 3.3.6'
