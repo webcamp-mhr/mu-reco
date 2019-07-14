@@ -1,2 +1,25 @@
-<h1>Products#new</h1>
-<p>Find me in app/views/products/new.html.erb</p>
+<!-- 商品新規追加 -->
+
+<h1>商品新規追加</h1>
+
+<%= form_for(@product) do |f| %>
+  アーティスト名
+  <!-- １つのformで複数のテーブルを扱う -->
+  <%= f.fields_for :artist do |ff| %>
+    <%= ff.text_field :artist_name %>
+  <% end %>
+  シングル/アルバム名
+  <%= f.text_filed :single_album_name %>
+  ジャケット画像
+  <%= f.text_filed :jacket_image %>
+  価格(税別価格)
+  <%= f.text_field :price %>
+  レーベル名
+  <%= f.fields_for :label do |ff| %>
+    <%= ff.text_field :label_name %>
+  <% end %>
+  ジャンル
+  <%= f.fields_for :genre do |ff| %>
+    <%= ff.text_field :genre_name %>
+  <% end %>
+<% end %>
