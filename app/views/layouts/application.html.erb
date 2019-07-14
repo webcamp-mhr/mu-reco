@@ -9,6 +9,41 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header class = "navbar navbar-default" style="background-color:pink;">
+      <div class = "container">
+        <nav class = "nav navbar-nav navbar-left" >
+          <span style="color: white; font-size: 30px; ">mu-reco</span>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right" >
+            <% if user_signed_in? %>
+             <li>
+                <%= link_to '商品一覧', products_path %>
+              </li>
+              <li>
+                <%= link_to 'マイページ', user_path(current_user) %>
+              </li>
+              <li>
+                <%= link_to 'カゴ', carts_path %>
+              </li>
+              <li>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to '商品一覧', products_path %>
+              </li>
+              <li>
+                <%= link_to '会員登録', new_user_registration_path %>
+              </li>
+              <li>
+                <%= link_to 'ログイン', new_user_session_path %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
   <body>
     <%= yield %>
   </body>
