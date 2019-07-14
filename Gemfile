@@ -66,6 +66,7 @@ gem 'kaminari'
 gem 'ransack'
 gem 'cancancan'
 gem 'refile'
+
 gem 'devise'
 gem 'cocoon'
 
