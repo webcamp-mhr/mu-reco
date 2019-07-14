@@ -9,9 +9,12 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @label = Label.new
-    @genre = Genre.new
-    @artist = Artist.new
+    # has_many の場合は build_XXXで記載する
+    #belongs_toの場合は XXX.build
+    @product.build_artist
+    @product.build_label
+    @product.build_genre
+
   end
 
   def edit
