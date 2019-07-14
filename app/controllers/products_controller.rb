@@ -15,6 +15,9 @@ class ProductsController < ApplicationController
     @product.build_label
     @product.build_genre
 
+    @disc = Disc.new
+    @discs = Disc.all
+
   end
 
   def edit
@@ -31,6 +34,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:single_album_name, :jacket_image, :price, :stock_quantity, :sales_status, :product_deleting_management)
+    params.require(:product).permit(artist_attribute: [:artist_name], :single_album_name, :jacket_image, 
+      :price, label_attribute: [:label_name], genre_attribute: [:genre_name], :stock_quantity, :sales_status, :product_deleting_management)
   end
 end

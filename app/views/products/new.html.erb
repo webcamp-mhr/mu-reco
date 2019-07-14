@@ -3,25 +3,48 @@
 <h1>商品新規追加</h1>
 
 <%= form_for(@product) do |f| %>
-  アーティスト名
-  <!-- １つのformで複数のテーブルを扱う -->
-  <%= f.fields_for :artist do |ff| %>
-    <%= ff.text_field :artist_name %>
-  <% end %><br>
-  シングル/アルバム名
-  <%= f.text_field :single_album_name %><br>
-  ジャケット画像
-  <%= f.text_field :jacket_image %><br>
-  価格(税別価格)
-  <%= f.text_field :price %><br>
-  レーベル名
-  <%= f.fields_for :label do |ff| %>
-    <%= ff.text_field :label_name %>
-  <% end %><br>
-  ジャンル
-  <%= f.fields_for :genre do |ff| %>
-    <%= ff.text_field :genre_name %>
-  <% end %><br>
-  在庫数
-  <%= f.text_field :purchase_quantity %><br>
+  <div>
+    アーティスト名
+    <!-- １つのformで複数のテーブルを扱う -->
+    <%= f.fields_for :artist do |ff| %>
+      <%= ff.text_field :artist_name %>
+    <% end %><br>
+    シングル/アルバム名
+    <%= f.text_field :single_album_name %><br>
+    ジャケット画像
+    <%= f.text_field :jacket_image %><br>
+    価格(税別価格)
+    <%= f.text_field :price %><br>
+    レーベル名
+    <%= f.fields_for :label do |ff| %>
+      <%= ff.text_field :label_name %>
+    <% end %><br>
+    ジャンル
+    <%= f.fields_for :genre do |ff| %>
+      <%= ff.text_field :genre_name %>
+    <% end %><br>
+  </div>
+  <div>
+    在庫数
+    <%= f.text_field :purchase_quantity %><br>
+    ステータス
+    <!-- ラジオボタン :カラム名 テーブルに登録する値  選択肢の文字</label> -->
+    <label>
+      <%= f.radio_button :sales_status, 1 %> 販売中
+    </label>
+    <label>
+      <%= f.radio_button :sales_status, 2 %> 販売停止中
+    </label>
+  </div>
+
+  <h2>シングル/アルバム内の曲</h2>
+  <% @discs.each do |disc| %>
+    <div class = "disc">
+      <!-- 改行されない -->
+      <h4 style="display:inline">ディスク</h4>
+      <%= link_to_function('削除') {|page| page[:disc].hide()} %>
+    </div>
+  <% end %>
+
+
 <% end %>
