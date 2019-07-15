@@ -1,4 +1,17 @@
 
-<h2>マイページ!!</h2>
+<h2>マイページ</h2>
 
-<%= @user.user_lastname %>
+<%= @user.user_firstname %>
+<%= @user.user_lastname %><br>
+<%= @user.user_firstname_kana %>
+<%= @user.user_lastname_kana %><br>
+<%= @user.phone_number %><br>
+<%= @user.email %>
+
+<p>
+  <%= link_to '編集', edit_user_path(@user) %>
+  |
+  <%= link_to '退会', edit_user_path(@user) %>
+</p>
+
+<%= link_to '購入履歴', purchases_histories_path, class:"btn btn-primary col-xs-5" %>
