@@ -1,0 +1,23 @@
+
+<h1>マイページ編集</h1>
+
+
+
+
+<%= form_for(@user) do |f| %>
+		<h4>名字</h4>
+		<%= f.text_field :user_lastname %>
+
+		<h4>名前</h4>
+		<%= f.text_field :user_firstname %>
+
+		<h4>名字（カナ）</h4>
+		<%= f.text_field :user_lastname_kana %>
+
+		<h4>名前（カナ）</h4>
+		<%= f.text_field :user_firstname_kana %>
+
+		<p><%= f.submit "更新" %></p>
+<% end %>
+
+<%= link_to "Show", user_path(@user) %>
