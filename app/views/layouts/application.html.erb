@@ -29,6 +29,22 @@
               <li>
                 <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
               </li>
+            <% elsif administrator_signed_in? %>
+              <li>
+                <%= link_to '新規追加', new_product_path %>
+              </li>
+              <li>
+                <%= link_to '商品一覧', products_path %>
+              </li>
+              <li>
+                <%= link_to 'ユーザー情報', users_path %>
+              </li>
+              <li>
+                <%= link_to '購入履歴', purchases_histories_path %>
+              </li>
+              <li>
+                <%= link_to 'ログアウト', destroy_administrator_session_path, method: :delete %>
+              </li>
             <% else %>
               <li>
                 <%= link_to '商品一覧', products_path %>
