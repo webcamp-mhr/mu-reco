@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true).page(params[:page]).reverse_order
   end
 
   def show
@@ -18,6 +19,7 @@ class ProductsController < ApplicationController
     @disc = Disc.new
     @genre = Genre.new
     @label = Label.new
+    @song_title = SongTitle.new
 
     # @discs = Disc.all
 
@@ -32,11 +34,23 @@ class ProductsController < ApplicationController
     @disc = Disc.new(disc_params)
     @genre = Genre.new(genre_params)
     @label = Label.new(label_params)
-    @product.save
-    @artist.save
-    @disc.save
+    @song_title = SongTitle.new(song_title_params)
+
     @genre.save
     @label.save
+    @artist.save
+
+    # @product.artist_id = @artist.id
+    # @product.genre_id = @genre.id
+    # @product.label_id = @label.id
+
+    @product.save
+
+    # @disc.product_id = @product.id
+    # @song_title.disc_id = @disc.id
+
+    @disc.save
+    @song_title.save
     redirect_to products_path
   end
 
@@ -55,6 +69,10 @@ class ProductsController < ApplicationController
 
   def disc_params
     params.require(:disc).permit(:disc_name)
+  end
+
+  def song_title_params
+    params.require(:song_title).permit(:song_title, :truck_number)
   end
 
   def genre_params

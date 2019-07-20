@@ -2,6 +2,13 @@
 
 <h1>商品一覧ページ</h1>
 
+<%= search_form_for @q do |f| %>
+  <%= f.label :name, "Keyword" %>
+  <%= f.search_field :single_album_name_cont %>
+
+  <%= f.submit "検索" %>
+<% end %>
+
 <table>
 
 
@@ -25,6 +32,8 @@
 	<% end %>
 
 </table>
+
+<%= paginate @products, class: "paginate" %>
 
 
 
