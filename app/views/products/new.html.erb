@@ -12,7 +12,7 @@
 
   レーベル名
   <%= fields_for(@label) do |l| %>
-    <%= l.text_field :label_name %>
+    <%= l.text_field :label_name %><br>
   <% end %>
 
   ジャンル
@@ -40,7 +40,8 @@
 
   曲名
   <%= fields_for(@song_title) do |s| %>
-    <%= s.text_field :song_title_name %><br>
+    <%= s.text_field :song_title %><br>
+    <%= s.text_field :truck_number %><br>
   <% end %>
 
   <%= f.submit "追加" %>
