@@ -1,59 +1,54 @@
-<!-- 商品新規追加 -->
 
-<h1>商品新規追加</h1>
 
 <%= form_for(@product) do |f| %>
-  <div>
+
+ジャケット画像
+  <%= f.text_field :jacket_image %><br>
+
+  <%= fields_for(@artist) do |a| %>
     アーティスト名
-    <!-- １つのformで複数のテーブルを扱う -->
-    <%= f.fields_for :artist do |ff| %>
-      <%= ff.text_field :artist_name %>
-    <% end %><br>
+    <%= a.text_field :artist_name %><br>
+  <% end %>
 
-    シングル/アルバム名
-    <%= f.text_field :single_album_name %><br>
+  レーベル名
+  <%= fields_for(@label) do |l| %>
+    <%= l.text_field :label_name %>
+  <% end %>
 
-    ジャケット画像
-    <%= f.text_field :jacket_image %><br>
+  ジャンル
+  <%= fields_for(@genre) do |g| %>
+    <%= g.text_field :genre_name %><br>
+  <% end %>
 
-    価格(税別価格)
-    <%= f.text_field :price %><br>
+  在庫数
+  <%= f.text_field :stock_quantity %><br>
 
-    レーベル名
-    <%= f.fields_for :label do |ff| %>
-      <%= ff.text_field :label_name %>
-    <% end %><br>
+  <label>
+    <%= f.radio_button :sales_status, 1 %> 販売中
+  </label>
+  <label>
+    <%= f.radio_button :sales_status, 2 %> 販売停止中
+  </label><br>
 
-    ジャンル
-    <%= f.fields_for :genre do |ff| %>
-      <%= ff.text_field :genre_name %>
-    <% end %><br>
-  </div>
-  <div>
+  価格(税別価格)
+  <%= f.text_field :price %><br>
 
-    在庫数
-    <%= f.text_field :stock_quantity %><br>
+  ディスク
+  <%= fields_for(@disc) do |d| %>
+    <%= d.text_field :disc_name %><br>
+  <% end %>
 
-    ステータス
-    <!-- ラジオボタン :カラム名 テーブルに登録する値  選択肢の文字</label> -->
-    <label>
-      <%= f.radio_button :sales_status, 1 %> 販売中
-    </label>
-    <label>
-      <%= f.radio_button :sales_status, 2 %> 販売停止中
-    </label>
-  </div>
-
-  <h2>シングル/アルバム内の曲</h2>
-  <% @discs.each do |disc| %>
-    <div class = "disc">
-      <!-- 改行されない -->
-      <h4 style="display:inline">ディスク</h4>
-      <%= link_to_function('削除') {|page| page[:disc].hide()} %>
-    </div>
+  曲名
+  <%= fields_for(@song_title) do |s| %>
+    <%= s.text_field :song_title_name %><br>
   <% end %>
 
   <%= f.submit "追加" %>
 
-
 <% end %>
+
+
+
+
+
+
