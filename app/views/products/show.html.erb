@@ -1,2 +1,50 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h2>商品詳細</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>シングルアルバム名/</th>
+				<th>アーティスト名/</th>
+				<th>ジャケット画像/</th>
+				<th>レーベル名/</th>
+				<th>ジャンル名/</th>
+				<th>在庫数/</th>
+				<th>値段（税込）/</th>
+				<th>販売ステータス/</th>
+				<th>ディスク名/</th>
+				<th>曲名/</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td><%= @product.single_album_name %></td>
+				<td><%= @artist.artist_name %></td>
+				<td></td>
+				<td><%= @label.label_name %></td>
+				<td><%= @genre.genre_name %></td>
+				<td><%= @product.stock_quantity %></td>
+				<td><%= @product.price %></td>
+				<td>
+					<% if @product.product_deleting_management == true %>
+						販売中
+					<% else %>
+						在庫切れ
+					<% end %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<p>
+  <%= link_to '戻る', products_path(@user) %>
+  <%= link_to 'カゴへ', products_path(@user) %>
+</p>
+
+
+<p>
+  <%= link_to '戻る', products_path(@user) %>
+  <%= link_to '削除', products_path(@user) %>
+  <%= link_to '編集', edit_product_path(@product) %>
+</p>
+
+

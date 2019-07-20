@@ -24,8 +24,8 @@
 	<% @products.each do |product| %>
 
 		<tr>
-			<td><%= product.single_album_name %></td>
 			<td><%= link_to product.single_album_name, product_path(product) %></td>
+			<td><%= product.single_album_name %></td>
 		</tr>
 	</tbody>
 
