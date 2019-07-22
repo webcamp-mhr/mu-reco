@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   has_many :carts
 
   # モデル同士の親子関係
-  accepts_nested_attributes_for :artist, allow_destroy: true
-  accepts_nested_attributes_for :genre, allow_destroy: true
-  accepts_nested_attributes_for :label, allow_destroy: true
+  # accepts_nested_attributes_for :artists, allow_destroy: true
+  # accepts_nested_attributes_for :genres, allow_destroy: true
+  # accepts_nested_attributes_for :labels, allow_destroy: true
 end

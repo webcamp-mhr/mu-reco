@@ -1,0 +1,14 @@
+
+
+<!-- レーベル新規追加ページ -->
+
+<div>
+  <h1>レーベル新規追加ページ</h1>
+
+  <%= form_for(@label) do |f| %>
+    <h4>レーベル名</h4>
+    <%= f.text_field :label_name %>
+    <br>
+    <%= f.submit "Create Label" %>
+  <% end %>
+</div>

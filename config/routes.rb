@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'products#top'
+root 'products#top'
 
-  devise_for :administrators
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+devise_for :administrators
+devise_for :users
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 resources :users, only: [:show, :edit, :update, :index ]
 
@@ -16,13 +16,13 @@ resources :purchases_histories, only: [:show, :edit, :update, :index, :new, :cre
 
 resources :carts, only: [:edit, :update, :index, :create, :destroy]
 
-resources :discs, only: [:create, :destroy]
+resources :discs, only: [:new, :create, :destroy]
 
-resources :genres, only: [:create, :destroy, :update]
+resources :genres, only: [:new, :create, :destroy, :update]
 
-resources :labels, only: [:create, :destroy, :update]
+resources :labels, only: [:new, :create, :destroy, :update]
 
-resources :artists, only: [:create, :destroy, :update]
+resources :artists, only: [:new, :create, :destroy, :update]
 
 resources :songs_titles, only: [:create, :destroy, :update, :new]
 

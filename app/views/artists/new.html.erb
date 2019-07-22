@@ -1,0 +1,14 @@
+
+
+<!-- アーティスト新規追加ページ -->
+
+<div>
+  <h1>アーティスト新規追加ページ</h1>
+
+  <%= form_for(@artist) do |f| %>
+    <h4>アーティスト名</h4>
+    <%= f.text_field :artist_name %>
+    <br>
+    <%= f.submit "Create Artist" %>
+  <% end %>
+</div>
