@@ -1,0 +1,14 @@
+
+
+<!-- ジャンル新規追加ページ -->
+
+<div>
+  <h1>ジャンル新規追加ページ</h1>
+
+  <%= form_for(@genre) do |f| %>
+    <h4>ジャンル名</h4>
+    <%= f.text_field :genre_name %>
+    <br>
+    <%= f.submit "Create Genre" %>
+  <% end %>
+</div>

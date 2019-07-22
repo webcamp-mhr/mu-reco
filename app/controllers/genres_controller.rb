@@ -1,11 +1,16 @@
 class GenresController < ApplicationController
-	
+
 	def destroy
 	end
 
+	def new
+		@genre = Genre.new
+	end
+
 	def create
-		@genre = genre.new(genre_params)
-    	@genre.save
+		genre = Genre.new(genre_params)
+    genre.save
+    redirect_to new_product_path
 	end
 
 	def update

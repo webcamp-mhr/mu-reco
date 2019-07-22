@@ -3,9 +3,14 @@ class LabelsController < ApplicationController
 	def destroy
 	end
 
+	def new
+		@label = Label.new
+	end
+
 	def create
-		@label = label.new(label_params)
-    	@label.save
+		label = Label.new(label_params)
+    label.save
+    redirect_to new_product_path
 	end
 
 	def update

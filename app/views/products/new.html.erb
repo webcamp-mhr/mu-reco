@@ -2,26 +2,23 @@
 
 <%= form_for(@product) do |f| %>
 
-ジャケット画像
-  <%= f.text_field :jacket_image %><br>
+  <h4>ジャケット画像</h4>
+  <%= f.text_field :jacket_image_id %><br>
 
-  <%= fields_for(@artist) do |a| %>
-    アーティスト名
-    <%= a.text_field :artist_name %><br>
-  <% end %>
+  <h4>アーティスト名</h4>
+  <%= f.collection_select :artist_id, Artist.all, :id, :artist_name, :prompt => true %>
+  <%= link_to "アーティスト名追加", new_artist_path %>
 
-  レーベル名
-  <%= fields_for(@label) do |l| %>
-    <%= l.text_field :label_name %><br>
-  <% end %>
+  <h4>レーベル名</h4>
+  <%= f.collection_select :label_id, Label.all, :id, :label_name, :prompt => true %>
+  <%= link_to "レーベル名追加", new_label_path %>
 
-  ジャンル
-  <%= fields_for(@genre) do |g| %>
-    <%= g.text_field :genre_name %><br>
-  <% end %>
+  <h4>ジャンル</h4>
+  <%= f.collection_select :genre_id, Genre.all, :id, :genre_name, :prompt => true %>
+  <%= link_to "ジャンル追加", new_genre_path %>
 
-  在庫数
-  <%= f.text_field :stock_quantity %><br>
+  <h4>在庫数</h4>
+  <%= f.number_field :stock_quantity %><br>
 
   <label>
     <%= f.radio_button :sales_status, 1 %> 販売中
@@ -30,21 +27,17 @@
     <%= f.radio_button :sales_status, 2 %> 販売停止中
   </label><br>
 
-  価格(税別価格)
-  <%= f.text_field :price %><br>
+  <h4>価格(税別価格)</h4>
+  <%= f.number_field :price %> 円
 
-  ディスク
-  <%= fields_for(@disc) do |d| %>
-    <%= d.text_field :disc_name %><br>
+  <h4>ディスク</h4>
+  <% @discs.each do |disc| %>
+    <%= disc.disc_name %> |  
+    <%= link_to "ディスク削除", disc_path, method: :delete %>
   <% end %>
-
-  曲名
-  <%= fields_for(@song_title) do |s| %>
-    <%= s.text_field :song_title %><br>
-    <%= s.text_field :truck_number %><br>
-  <% end %>
-
-  <%= f.submit "追加" %>
+  <%= link_to "ディスク追加", new_disc_path %>
+  <br>
+  <%= f.submit "商品追加" %>
 
 <% end %>
 
