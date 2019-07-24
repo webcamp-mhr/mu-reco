@@ -1,2 +1,28 @@
-<h1>Carts#index</h1>
-<p>Find me in app/views/carts/index.html.erb</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <table class="table table-hover table-inverse">
+
+
+        <thead>
+          <% @carts.each do |cart| %>
+            <tr>
+              <th><%= cart.product.single_album_name %></th>
+              <th><%= cart.product.artist.artist_name %></th>
+              <th><%= (cart.product.price * 1.08).floor %>円</th>
+              <%= form_for(cart) do |f| %>
+                <th><%= f.text_field :purchase_quantity, autofocus: true, :size => "4*2" %>枚<p><%= f.submit "決定", class: "btn btn-primary" %></p></th>
+              <% end %>
+              <th><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></th>
+            </tr>
+          <% end %>
+        </thead>
+
+
+      </table>
+    </div>
+
+  </div>
+</div>
