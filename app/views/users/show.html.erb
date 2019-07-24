@@ -6,7 +6,11 @@
 <%= @user.user_firstname_kana %>
 <%= @user.user_lastname_kana %><br>
 <%= @user.phone_number %><br>
-<%= @user.email %>
+
+<% @user.addresses.each do |address| %>
+  <%= address.postcode %><br>
+  <%= address.address %>
+<% end %>
 
 <p>
   <%= link_to '編集', edit_user_path(@user) %>
@@ -14,4 +18,3 @@
 </p>
 
 <%= link_to '購入履歴', purchases_histories_path, class:"btn btn-primary col-xs-5" %>
-
