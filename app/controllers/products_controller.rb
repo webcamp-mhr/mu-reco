@@ -10,6 +10,8 @@ class ProductsController < ApplicationController
     @artist = Artist.find(params[:id])
     @genre = Genre.find(params[:id])
     @label = Label.find(params[:id])
+
+    @cart = Cart.new
   end
 
   def new
