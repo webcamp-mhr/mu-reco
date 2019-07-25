@@ -1,9 +1,12 @@
 
+<h1>商品新規追加</h1>
 
-<%= form_for(@product) do |f| %>
+<%= form_for @product do |f| %>
+  <h4>シングルアルバム名</h4>
+  <%= f.text_field :single_album_name %>
 
   <h4>ジャケット画像</h4>
-  <%= f.text_field :jacket_image_id %><br>
+  <%= f.attachment_field :jacket_image %><br>
 
   <h4>アーティスト名</h4>
   <%= f.collection_select :artist_id, Artist.all, :id, :artist_name, :prompt => true %>
@@ -21,26 +24,26 @@
   <%= f.number_field :stock_quantity %><br>
 
   <label>
-    <%= f.radio_button :sales_status, 1 %> 販売中
+    <%= f.radio_button :sales_status, true %> 販売中
   </label>
   <label>
-    <%= f.radio_button :sales_status, 2 %> 販売停止中
+    <%= f.radio_button :sales_status, false %> 販売停止中
   </label><br>
 
   <h4>価格(税別価格)</h4>
   <%= f.number_field :price %> 円
 
   <h4>ディスク</h4>
-  <% @discs.each do |disc| %>
-    <%= disc.disc_name %> |  
-    <%= link_to "ディスク削除", disc_path, method: :delete %>
+  <%= f.fields_for :discs do |disc| %>
+    <%= render 'disc_fields', f: disc %>
   <% end %>
-  <%= link_to "ディスク追加", new_disc_path %>
+  <div>
+    <%= link_to_add_association 'ディスク追加',f, :discs %>
+  </div>
   <br>
-  <%= f.submit "商品追加" %>
-
+  <%= f.submit "追加" %>
 <% end %>
-
+<%= link_to '戻る', products_path %>
 
 
 
