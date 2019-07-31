@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_045510) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jacket_image_id"
+    t.integer "disc_id"
     t.boolean "sales_status"
   end
 

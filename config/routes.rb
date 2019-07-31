@@ -10,7 +10,7 @@ resources :users, only: [:show, :edit, :update, :index ]
 
 resources :adderesses, only: [:create, :destroy, :update]
 
-resources :products, only: [:show, :edit, :update, :index, :new, :create]
+resources :products, only: [:show, :edit, :update, :index, :new, :create, :destroy]
 
 resources :purchases_histories, only: [:show, :edit, :update, :index, :new, :create]
 

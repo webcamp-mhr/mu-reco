@@ -24,6 +24,7 @@
 	<% @products.each do |product| %>
 
 		<tr>
+			<td><%= attachment_image_tag product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'200x200' %></td>
 			<td><%= link_to product.single_album_name, product_path(product) %></td>
 			<td><%= product.artist.artist_name %></td>
 		</tr>

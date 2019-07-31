@@ -7,16 +7,21 @@
 
 
         <thead>
-          <% @carts.each do |cart| %>
-            <tr>
-              <th><%= cart.product.single_album_name %></th>
-              <th><%= cart.product.artist.artist_name %></th>
-              <th><%= (cart.product.price * 1.08).floor %>円</th>
-              <%= form_for(cart) do |f| %>
-                <th><%= f.text_field :purchase_quantity, autofocus: true, :size => "4*2" %>枚<p><%= f.submit "決定", class: "btn btn-primary" %></p></th>
-              <% end %>
-              <th><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></th>
-            </tr>
+          <%= form_tag("/purchases_products/create") do %>
+            <% current_user.carts.each do |cart| %>
+              <tr>
+                <li><%= check_box_tag :cart_list %>
+                <%= cart.product.single_album_name %>
+                <%= cart.product.artist.artist_name %>
+                <%= (cart.product.price * 1.08 * cart.purchase_quantity).floor %>円
+                <%= form_for(cart) do |f| %>
+                  <%= f.text_field :purchase_quantity, autofocus: true, :size => "4*2" %>枚<p><%= f.submit "決定", class: "btn btn-primary" %></p>
+                <% end %>
+                <%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %>
+                </li>
+              </tr>
+            <% end %>
+            <%= link_to '購入確認', new_purchases_history_path %>
           <% end %>
         </thead>
 

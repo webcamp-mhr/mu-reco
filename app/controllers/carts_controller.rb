@@ -7,7 +7,7 @@ class CartsController < ApplicationController
 	end
 
 	def create
-		cart = Cart.new(cart_params)
+		cart = current_user.carts.new(cart_params)
 		cart.purchase_quantity = 1
 		if cart.save
 			redirect_to carts_path
@@ -16,7 +16,7 @@ class CartsController < ApplicationController
 
 
 	def index
-		@carts = Cart.all
+		
 	end
 
 	def update

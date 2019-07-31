@@ -7,10 +7,6 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
 
-    @artist = Artist.find(params[:id])
-    @genre = Genre.find(params[:id])
-    @label = Label.find(params[:id])
-
     @cart = Cart.new
   end
 
