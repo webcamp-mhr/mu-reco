@@ -73,4 +73,3 @@ gem 'jquery-rails'
 gem 'cocoon'
 
 
-

@@ -4,7 +4,7 @@
 
 
 
-<%= form_for(@user) do |f| %>
+<%= form_for @user do |f| %>
 		<h4>名字</h4>
 		<%= f.text_field :user_lastname %>
 
@@ -17,7 +17,14 @@
 		<h4>名前（カナ）</h4>
 		<%= f.text_field :user_firstname_kana %>
 
+    <%= f.fields_for :addresses do |address| %>
+      <%= render 'address_fields', f: address %>
+    <% end %>
+    <div>
+      <%= link_to_add_association 'add',f, :addresses %>
+    </div>
+
 		<p><%= f.submit "更新" %></p>
 <% end %>
 
-<%= link_to "Show", user_path(@user) %>
+<%= link_to "戻る", user_path(@user) %>

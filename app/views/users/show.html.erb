@@ -9,12 +9,12 @@
 
 <% @user.addresses.each do |address| %>
   <%= address.postcode %><br>
-  <%= address.address %>
+  <%= address.address %><br>
 <% end %>
 
 <p>
   <%= link_to '編集', edit_user_path(@user) %>
-  <%= link_to '退会', edit_user_path(@user) %>
+  <%= link_to '退会', user_registration_path(@user), method: :delete, "data-confirm" => "Are you sure?"%>
 </p>
 
 <%= link_to '購入履歴', purchases_histories_path, class:"btn btn-primary col-xs-5" %>
