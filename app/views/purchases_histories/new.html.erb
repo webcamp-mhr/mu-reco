@@ -1,26 +1,50 @@
+
+<!-- 購入確認ページ -->
+
 <h1>購入確認画面</h1>
 
 <table>
+  <thead>
+    <tr>
+      <th>ジャケ写</th>
+      <th>シングルアルバム名</th>
+      <th>枚数</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
 
-
-	<thead>
-		<tr>
-			<th>ジャケット画像</th>
-			<th>商品名</th>
-			<th>枚数</th>
-			<th>小計</th>
-		</tr>
-	</thead>
-
-	<tbody>
-	
-	</tbody>
-
-	<h3>お届け先の選択</h3>
-
-	<h3>支払い方法の選択</h3>
-
+    <tr>
+      <td><%= link_to product.single_album_name, product_path(product) %></td>
+      <td><%= product.artist.artist_name %></td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<%= link_to '購入確定', products_path %>
+<div>
+  <h4>お届け先の選択</h4>
+  <label>
+    <%= f.radio_button :delivery_status, '1' %> 受付中
+  </label>
+  <label>
+    <%= f.radio_button :delivery_status, '2' %> 商品準備中
+  </label>
+  <label>
+    <%= f.radio_button :delivery_status, '3' %> 出荷済み
+  </label>
+</div>
 
+<div>
+  <h4>支払い選択</h4>
+  <label>
+    <%= f.radio_button :payment_status, '1' %> 銀行振込
+  </label>
+  <label>
+    <%= f.radio_button :payment_status, '2' %> クレジットカード
+  </label>
+  <label>
+    <%= f.radio_button :payment_status, '3' %> 代引
+  </label>
+</div>

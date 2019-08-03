@@ -11,6 +11,7 @@ class PurchasesHistoriesController < ApplicationController
 	end
 
 	def new
+		
 	end
 	
 

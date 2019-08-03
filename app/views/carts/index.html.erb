@@ -7,25 +7,22 @@
 
 
         <thead>
-          <%= form_tag("/purchases_products/create") do %>
+          <%= form_tag update_all_path, method: :put do %>
             <% current_user.carts.each do |cart| %>
               <tr>
-                <li><%= check_box_tag :cart_list %>
-                <%= cart.product.single_album_name %>
-                <%= cart.product.artist.artist_name %>
-                <%= (cart.product.price * 1.08 * cart.purchase_quantity).floor %>円
-                <%= form_for(cart) do |f| %>
-                  <%= f.text_field :purchase_quantity, autofocus: true, :size => "4*2" %>枚<p><%= f.submit "決定", class: "btn btn-primary" %></p>
+                <%= fields_for('carts[]', cart) do |f| %>
+                  <%= f.check_box :check %>
+                  <%= cart.product.single_album_name %>
+                  <%= cart.product.artist.artist_name %>
+                  <%= (cart.product.price * 1.08 * cart.purchase_quantity).floor %>円
+                  <%= f.number_field :purchase_quantity, autofocus: true, :size => "4*2" %> 枚
                 <% end %>
                 <%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %>
-                </li>
               </tr>
             <% end %>
-            <%= link_to '購入確認', new_purchases_history_path %>
+            <%= submit_tag '購入確認' %>
           <% end %>
         </thead>
-
-
       </table>
     </div>
 
