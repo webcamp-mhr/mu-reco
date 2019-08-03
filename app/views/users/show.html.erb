@@ -1,16 +1,36 @@
 
 <h2>マイページ</h2>
 
-<%= @user.user_firstname %>
-<%= @user.user_lastname %><br>
-<%= @user.user_firstname_kana %>
-<%= @user.user_lastname_kana %><br>
-<%= @user.phone_number %><br>
+<table class="table">
+	<thead>
+		<tr>
+			<th>姓</th>
+			<th>名</th>
+			<th>セイ</th>
+			<th>メイ</th>
+			<th>電話番号</th>
+			<th>郵便番号 / 住所(優先番号)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%= @user.user_lastname %></td>
+			<td><%= @user.user_firstname %></td>
+			<td><%= @user.user_lastname_kana %></td>
+			<td><%= @user.user_firstname_kana %></td>
+			<td><%= @user.phone_number %></td>
+			<td>
+				<% @user.addresses.each do |address| %>
+				  <%= address.postcode %>
+				  <%= address.address %>
+				  (<%= address.address_priority %>)<br>
+				<% end %>
+			</td>
 
-<% @user.addresses.each do |address| %>
-  <%= address.postcode %><br>
-  <%= address.address %><br>
-<% end %>
+		</tr>
+	</tbody>
+</table>
+
 
 <p>
   <%= link_to '編集', edit_user_path(@user) %>
@@ -18,3 +38,4 @@
 </p>
 
 <%= link_to '購入履歴', purchases_histories_path, class:"btn btn-primary col-xs-5" %>
+
