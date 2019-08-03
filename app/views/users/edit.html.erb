@@ -1,30 +1,63 @@
 
 <h1>マイページ編集</h1>
 
+<div class="form-horizontal">
+		<%= form_for @user do |f| %>
+			<div class="form-group">
+				<div class="col-xs-2">
+					<h4>名字</h4>
+				</div>
+				<div class="col-xs-10">
+					<%= f.text_field :user_lastname %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-2">
+					<h4>名前</h4>
+				</div>
+				<div class="col-xs-10">
+					<%= f.text_field :user_firstname %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-2">
+					<h4>名字（カナ）</h4>
+				</div>
+				<div class="col-xs-10">
+					<%= f.text_field :user_lastname_kana %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-2">
+					<h4>名前（カナ）</h4>
+				</div>
+				<div class="col-xs-10">
+					<%= f.text_field :user_firstname_kana %>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-2">
+					<h4>住所</h4>
+				</div>
+				<div class="col-xs-10">
+					<%= f.fields_for :addresses do |address| %>
+			      <%= render 'address_fields', f: address %>
+			    <% end %>
+			    <div>
+			      <%= link_to_add_association '住所追加',f, :addresses %>
+			    </div>
+				</div>
+			</div>
+
+			<p><%= f.submit "更新" %></p>
+		<% end %>
+
+		<p><%= link_to "戻る", user_path(@user) %></p>
+
+</div>
 
 
-
-<%= form_for @user do |f| %>
-		<h4>名字</h4>
-		<%= f.text_field :user_lastname %>
-
-		<h4>名前</h4>
-		<%= f.text_field :user_firstname %>
-
-		<h4>名字（カナ）</h4>
-		<%= f.text_field :user_lastname_kana %>
-
-		<h4>名前（カナ）</h4>
-		<%= f.text_field :user_firstname_kana %>
-
-    <%= f.fields_for :addresses do |address| %>
-      <%= render 'address_fields', f: address %>
-    <% end %>
-    <div>
-      <%= link_to_add_association 'add',f, :addresses %>
-    </div>
-
-		<p><%= f.submit "更新" %></p>
-<% end %>
-
-<%= link_to "戻る", user_path(@user) %>
