@@ -1,31 +1,41 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
 
-      <table class="table table-hover table-inverse">
 
+      <table class="table">
 
         <thead>
+          <tr>
+            <th>チェック欄</th>
+            <th>商品名</th>
+            <th>アーティスト名</th>
+            <th>価格（税込）</th>
+            <th>購入数</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
           <%= form_tag update_all_path, method: :put do %>
             <% current_user.carts.each do |cart| %>
-              <tr>
                 <%= fields_for('carts[]', cart) do |f| %>
-                  <%= f.check_box :check %>
-                  <%= cart.product.single_album_name %>
-                  <%= cart.product.artist.artist_name %>
-                  <%= (cart.product.price * 1.08 * cart.purchase_quantity).floor %>円
-                  <%= f.number_field :purchase_quantity, autofocus: true, :size => "4*2" %> 枚
+                  <tr>
+                    <td><%= f.check_box :check %></td>
+                    <td><%= cart.product.single_album_name %></td>
+                    <td><%= cart.product.artist.artist_name %></td>
+                    <td><%= (cart.product.price * cart.purchase_quantity).floor %>円</td>
+                    <td><%= f.number_field :purchase_quantity, autofocus: true, :size => "4*2" %> 枚</td>
+                    <td><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></td>
+                  </tr>
                 <% end %>
-                <%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %>
-              </tr>
             <% end %>
-            <%= submit_tag '購入確認' %>
+            <p><%= submit_tag '購入確認' %></p>
           <% end %>
-        </thead>
+        </tbody>
+
       </table>
-    </div>
+
 
   </div>
 </div>
-
