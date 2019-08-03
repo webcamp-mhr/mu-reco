@@ -5,6 +5,7 @@ root 'products#top'
 devise_for :administrators
 devise_for :users
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+match 'carts/all' => 'carts#update_all', :as => :update_all, :via => :put
 
 resources :users, only: [:show, :edit, :update, :index ]
 
@@ -27,5 +28,9 @@ resources :artists, only: [:new, :create, :destroy, :update]
 resources :songs_titles, only: [:create, :destroy, :update, :new]
 
 resources :purchases_products, only: [:create]
+
+# patch 'carts/all' => 'carts#update_all', :as => :update_all
+# put 'carts/all' => 'carts#update_all', :as => :update_all
+
 
 end

@@ -16,7 +16,8 @@ class CartsController < ApplicationController
 
 
 	def index
-		
+		# @carts = Cart.where(user_id: current_user.id)
+		# binding.pry
 	end
 
 	def update
@@ -26,9 +27,24 @@ class CartsController < ApplicationController
 		end
 	end
 
+	# PATCH(PUT) /carts/all
+	def update_all
+	  params.permit!
+	  # binding.pry
+	  params[:carts].keys.each do |quantity|
+	    @cart = Cart.find(quantity.to_i)
+	    @cart.update(params[:carts][quantity])
+	  end
+	  redirect_to new_purchases_history_path
+	end
+
 	private
 	def cart_params
 		params.require(:cart).permit(:product_id, :user_id, :purchase_quantity)
+	end
+
+	def carts_params
+		params.permit(:purchase_quantity)[:carts]
 	end
 
 end
