@@ -11,9 +11,10 @@ class PurchasesHistoriesController < ApplicationController
 	end
 
 	def new
-		
+		@carts = Cart.all
+		@purchase_history = PurchaseHistory.new
+    # binding.pry
 	end
-	
 
 
 

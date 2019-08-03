@@ -2,11 +2,15 @@
 <div class="container">
   <div class="row">
 
-
       <table class="table">
 
         <thead>
           <tr>
+
+          <%= form_tag update_all_path, method: :put do %>
+            <% current_user.carts.each do |cart| %>
+              <td>
+
             <th>チェック欄</th>
             <th>商品名</th>
             <th>アーティスト名</th>
@@ -19,6 +23,7 @@
         <tbody>
           <%= form_tag update_all_path, method: :put do %>
             <% current_user.carts.each do |cart| %>
+
                 <%= fields_for('carts[]', cart) do |f| %>
                   <tr>
                     <td><%= f.check_box :check %></td>
@@ -29,9 +34,17 @@
                     <td><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></td>
                   </tr>
                 <% end %>
+
+                <%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %>
+              </td>
+
             <% end %>
             <p><%= submit_tag '購入確認' %></p>
           <% end %>
+
+          </tr>
+        </thead>
+
         </tbody>
 
       </table>
