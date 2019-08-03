@@ -12,6 +12,7 @@ class PurchasesHistoriesController < ApplicationController
 
 	def new
 	end
+	
 
 
 
