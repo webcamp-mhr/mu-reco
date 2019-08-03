@@ -7,9 +7,10 @@
 
 
         <thead>
+          <tr>
           <%= form_tag update_all_path, method: :put do %>
             <% current_user.carts.each do |cart| %>
-              <tr>
+              <td>
                 <%= fields_for('carts[]', cart) do |f| %>
                   <%= f.check_box :check %>
                   <%= cart.product.single_album_name %>
@@ -18,10 +19,11 @@
                   <%= f.number_field :purchase_quantity, autofocus: true, :size => "4*2" %> 枚
                 <% end %>
                 <%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %>
-              </tr>
+              </td>
             <% end %>
             <%= submit_tag '購入確認' %>
           <% end %>
+          </tr>
         </thead>
       </table>
     </div>

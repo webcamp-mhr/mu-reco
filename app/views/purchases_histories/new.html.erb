@@ -13,38 +13,46 @@
     </tr>
   </thead>
   <tbody>
-  <% @products.each do |product| %>
+    <% @carts.each do |cart| %>
 
-    <tr>
-      <td><%= link_to product.single_album_name, product_path(product) %></td>
-      <td><%= product.artist.artist_name %></td>
-    </tr>
+      <tr>
+        <td><%= cart.product.single_album_name %></td>
+        <td><%= cart.product.artist.artist_name %></td>
+        <td><%= cart.purchase_quantity %></td>
+        <td><%= cart.product.price %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
-<div>
-  <h4>お届け先の選択</h4>
-  <label>
-    <%= f.radio_button :delivery_status, '1' %> 受付中
-  </label>
-  <label>
-    <%= f.radio_button :delivery_status, '2' %> 商品準備中
-  </label>
-  <label>
-    <%= f.radio_button :delivery_status, '3' %> 出荷済み
-  </label>
-</div>
+<%= form_for(@purchase_history, url: purchases_products_path) do |f| %>
 
-<div>
-  <h4>支払い選択</h4>
-  <label>
-    <%= f.radio_button :payment_status, '1' %> 銀行振込
-  </label>
-  <label>
-    <%= f.radio_button :payment_status, '2' %> クレジットカード
-  </label>
-  <label>
-    <%= f.radio_button :payment_status, '3' %> 代引
-  </label>
-</div>
+  <div>
+    <h4>お届け先の選択</h4>
+    <label>
+      <%= f.radio_button :delivery_status, '1' %> 受付中
+    </label>
+    <label>
+      <%= f.radio_button :delivery_status, '2' %> 商品準備中
+    </label>
+    <label>
+      <%= f.radio_button :delivery_status, '3' %> 出荷済み
+    </label>
+  </div>
+
+  <div>
+    <h4>支払い選択</h4>
+    <label>
+      <%= f.radio_button :payment_status, '1' %> 銀行振込
+    </label>
+    <label>
+      <%= f.radio_button :payment_status, '2' %> クレジットカード
+    </label>
+    <label>
+      <%= f.radio_button :payment_status, '3' %> 代引
+    </label>
+  </div>
+
+  <%= f.submit '購入確定' %>
+
+<% end %>
