@@ -23,6 +23,21 @@
     <%= f.text_field :user_lastname_kana, autofocus: true, autocomplete: "user_lastname_kana" %>
   </div>
 
+  <%= f.fields_for :profile do |f| %>
+
+  <div class="nested-fields">
+    <h4>優先番号</h4>
+    <%= f.number_field :address_priority, :size => "4*2"%><br>
+    <h4>郵便番号</h4>
+    <%= f.text_field :postcode, class: "col-xs-12 postcode" %><br>
+    <h4>住所</h4>
+    <%= f.text_field :address, class: "col-xs-12 address" %><br>
+  </div>
+
+  <% end %>
+
+
+
   <div class="field">
     <%= f.label :phone_number %><br />
     <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %>

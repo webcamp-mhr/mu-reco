@@ -25,6 +25,8 @@ class PurchaseHistoriesController < ApplicationController
 		# @purchase_history.address_id = current_user.address.id
 		redirect_to purchase_products_path, method: :post
 
+
+
 	end
 
 	def update
