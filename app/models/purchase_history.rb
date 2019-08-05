@@ -1,7 +1,5 @@
 class PurchaseHistory < ApplicationRecord
 
   belongs_to :user
-  has_many :purchases_products
-
-
+  has_many :purchase_products
 end

@@ -1,10 +1,10 @@
 class PurchaseHistoriesController < ApplicationController
 	def index
-		@purchases_histories = PurchasesHistory.all.page(params[:page]).reverse_order
+		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order
 	end
 
 	def show
-		@purchases_history = PurchasesHistory.find(params[:id])
+		@purchase_history = PurchaseHistory.find(params[:id])
 	end
 
 	def edit
@@ -20,11 +20,30 @@ class PurchaseHistoriesController < ApplicationController
 
 	def create
 		@purchase_history = PurchaseHistory.new(purchase_history_params)
-		@purchase_history.save
 		@purchase_history.user_id = current_user.id
 		# @purchase_history.address_id = current_user.address.id
-		redirect_to purchase_products_path, method: :post
-
+		@purchase_history.save
+		@carts = Cart.all
+    @purchase_product = PurchaseProduct.new
+    @carts.each do |cart|
+      if cart.check == 1   #チェックがついてる場合
+        @purchase_product.single_album_name = cart.product.single_album_name
+        @purchase_product.jacket_image_id = cart.product.jacket_image_id
+        @purchase_product.prodcut_price = cart.product.price
+        @purchase_product.artist_name = cart.user.user_firstname
+        @purchase_product.label_name = cart.product.label.label_name
+        @purchase_product.genre_name = cart.product.genre.genre_name
+        @purchase_product.purchase_quantity = cart.purchase_quantity
+        @purchase_product.subtotal = cart.product.price
+      end
+    end
+    if @purchase_product.save
+      redirect_to products_path
+    else
+      render new_purchase_history_path
+    end
+		# redirect_to purchase_products_path, method: :post
+		# redirect_to controller: 'purchase_products', action: 'create'
 	end
 
 	def update
@@ -33,6 +52,6 @@ class PurchaseHistoriesController < ApplicationController
 	private
 
     def purchase_history_params
-      params.require(:purchase_history).permit(:total_price, :delivery_status)
+      params.require(:purchase_history).permit(:delivery_status, :payment_status)
     end
 end
