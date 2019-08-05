@@ -22,6 +22,7 @@ class PurchaseHistoriesController < ApplicationController
 		@purchase_history = PurchaseHistory.new(purchase_history_params)
 		@purchase_history.user_id = current_user.id
 		# @purchase_history.address_id = current_user.address.id
+
 		@purchase_history.save
 		@carts = Cart.all
     @purchase_product = PurchaseProduct.new
@@ -42,8 +43,6 @@ class PurchaseHistoriesController < ApplicationController
     else
       render new_purchase_history_path
     end
-		# redirect_to purchase_products_path, method: :post
-		# redirect_to controller: 'purchase_products', action: 'create'
 	end
 
 	def update
