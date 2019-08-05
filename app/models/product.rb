@@ -8,6 +8,8 @@ class Product < ApplicationRecord
 
   attachment :jacket_image
 
+  acts_as_paranoid
+
   # 親子関係
   accepts_nested_attributes_for :discs, reject_if: :all_blank, allow_destroy: true
 end
