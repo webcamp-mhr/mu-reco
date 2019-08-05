@@ -35,7 +35,7 @@ class CartsController < ApplicationController
 	    @cart = Cart.find(quantity.to_i)
 	    @cart.update(params[:carts][quantity])
 	  end
-	  redirect_to new_purchases_history_path
+	  redirect_to new_purchase_history_path
 	end
 
 	private

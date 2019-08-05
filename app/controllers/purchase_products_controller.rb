@@ -1,4 +1,4 @@
-class PurchasesProductsController < ApplicationController
+class PurchaseProductsController < ApplicationController
 
   def create
     @carts = Cart.all
@@ -7,7 +7,7 @@ class PurchasesProductsController < ApplicationController
       # if cart.check   #チェックがついてる場合
         # binding.pry
         @purchase_product.single_album_name = cart.product.single_album_name
-        @purchase_product.jacket_image_id = cart.product.jacket_image_id
+        # @purchase_product.jacket_image_id = cart.product.jacket_image_id
         @purchase_product.prodcut_price = cart.product.price
         @purchase_product.artist_name = cart.user.user_firstname
         @purchase_product.label_name = cart.product.label.label_name
@@ -19,7 +19,7 @@ class PurchasesProductsController < ApplicationController
     if @purchase_product.save
       redirect_to products_path
     else
-      render new_purchases_history_path
+      render new_purchase_history_path
     end
   end
 

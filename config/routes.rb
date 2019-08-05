@@ -13,7 +13,7 @@ resources :adderesses, only: [:create, :destroy, :update]
 
 resources :products, only: [:show, :edit, :update, :index, :new, :create, :destroy]
 
-resources :purchases_histories, only: [:show, :edit, :update, :index, :new, :create]
+resources :purchase_histories, only: [:show, :edit, :update, :index, :new, :create]
 
 resources :carts, only: [:edit, :update, :index, :create, :destroy]
 
@@ -27,10 +27,7 @@ resources :artists, only: [:new, :create, :destroy, :update]
 
 resources :songs_titles, only: [:create, :destroy, :update, :new]
 
-resources :purchases_products, only: [:create]
-
-# patch 'carts/all' => 'carts#update_all', :as => :update_all
-# put 'carts/all' => 'carts#update_all', :as => :update_all
+resources :purchase_products, only: [:create]
 
 
 end
