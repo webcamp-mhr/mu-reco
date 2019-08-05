@@ -11,5 +11,7 @@ class User < ApplicationRecord
   has_many :carts
   has_many :purchases_histories
 
+  acts_as_paranoid
+
 
 end

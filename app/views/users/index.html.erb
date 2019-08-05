@@ -16,7 +16,7 @@
 		</tr>
 	</thead>
 
-	<% @users.each do |user| %>
+	<% @users.with_deleted.each do |user| %>
 
 	<tbody>
 		<tr>
