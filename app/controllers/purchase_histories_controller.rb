@@ -22,12 +22,11 @@ class PurchaseHistoriesController < ApplicationController
 		@purchase_history = PurchaseHistory.new(purchase_history_params)
 		@purchase_history.user_id = current_user.id
 		# @purchase_history.address_id = current_user.address.id
-
 		@purchase_history.save
 		@carts = Cart.all
     @purchase_product = PurchaseProduct.new
     @carts.each do |cart|
-      if cart.check == 1   #チェックがついてる場合
+      if cart.check == true   #チェックがついてる場合
         @purchase_product.single_album_name = cart.product.single_album_name
         @purchase_product.jacket_image_id = cart.product.jacket_image_id
         @purchase_product.prodcut_price = cart.product.price

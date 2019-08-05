@@ -14,13 +14,14 @@
   </thead>
   <tbody>
     <% @carts.each do |cart| %>
-
-      <tr>
-        <td><%= cart.product.single_album_name %></td>
-        <td><%= cart.product.artist.artist_name %></td>
-        <td><%= cart.purchase_quantity %></td>
-        <td><%= cart.product.price %></td>
-      </tr>
+      <% if cart.check == true %>
+        <tr>
+          <td><%= cart.product.single_album_name %></td>
+          <td><%= cart.product.artist.artist_name %></td>
+          <td><%= cart.purchase_quantity %></td>
+          <td><%= cart.product.price %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
