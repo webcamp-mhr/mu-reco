@@ -1,6 +1,6 @@
 class PurchasesHistoriesController < ApplicationController
 	def index
-		@purchases_histories = PurchasesHistory.all.page(params[:page]).reverse_order
+		@purchases_histories = PurchasesHistory.page(params[:page]).reverse_order
 	end
 
 	def show
