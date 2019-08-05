@@ -1,2 +1,69 @@
-<h1>PurchasesHistories#show</h1>
-<p>Find me in app/views/purchases_histories/show.html.erb</p>
+<h2>購入履歴詳細</h2>
+  <table class="table">
+    <thead>
+      <tr align="center">
+        <th>シングルアルバム名</th>
+        <th>ジャケット画像</th>
+        <th>アーティスト名</th>
+        <th>レーベル名</th>
+        <th>ジャンル名</th>
+        <th>在庫数</th>
+        <th>値段（税込）</th>
+        <th>販売ステータス</th>
+        <th>ディスク名</th>
+        <th>曲名</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @product.single_album_name %></td>
+        <td><%= attachment_image_tag @product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></td>
+        <td><%= @product.artist.artist_name %></td>
+        <td><%= @product.label.label_name %></td>
+        <td><%= @product.genre.genre_name %></td>
+        <td><%= @product.stock_quantity %></td>
+        <td><%= @product.price %></td>
+        <td>
+          <% if @product.stock_quantity >= 1 %> <!-- 在庫が0のとき -->
+            <% if @product.sales_status == true %>
+              販売中
+            <% elsif @product.sales_status == false %>
+              販売停止中
+            <% end %>
+          <% else %>
+            在庫切れ
+          <% end %>
+        </td>
+        <td>
+          <% @product.discs.each do |disc| %>
+            <%= disc.disc_name %><br>
+          <% end %>
+        </td>
+        <td>
+          <% @product.discs.each do |disc| %>
+            <% disc.song_titles.each do |song_title| %>
+              <%= song_title.song_title %><br>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<p>
+  <%= link_to '戻る', products_path(@user) %>
+  <%= form_for(@cart) do |f| %>
+    <%= f.hidden_field :product_id, :value => @product.id %>
+    <%= f.submit "カゴへ", class: "btn btn-large btn-primary" %>
+  <% end %>
+</p>
+
+
+<p>
+  <%= link_to '戻る', products_path %>
+  <%= link_to '削除', product_path(@product) %>
+  <%= link_to '編集', edit_product_path(@product) %>
+</p>
+
+
