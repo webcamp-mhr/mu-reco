@@ -32,3 +32,4 @@ resources :purchase_products, only: [:create]
 
 end
 
+
