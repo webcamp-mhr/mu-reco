@@ -10,6 +10,7 @@
 Administrator.create(email: 'masaki@gmail.com', password: 'masaki')
 
 User.create(email: 'a@a', password: 'aaaaaa', user_lastname: 'a', user_firstname: 'a', user_lastname_kana: 'a', user_firstname_kana: 'a', phone_number: '08011110000')
+User.create(email: 'b@b', password: 'bbbbbb', user_lastname: 'b', user_firstname: 'b', user_lastname_kana: 'b', user_firstname_kana: 'b', phone_number: '08011112222')
 
 Genre.create!(
   [{

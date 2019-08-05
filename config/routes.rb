@@ -7,7 +7,7 @@ devise_for :users, controllers: { registrations: 'users/registrations' }
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 match 'carts/all' => 'carts#update_all', :as => :update_all, :via => :put
 
-resources :users, only: [:show, :edit, :update, :index ]
+resources :users, only: [:show, :edit, :update, :index, :destroy ]
 
 resources :adderesses, only: [:create, :destroy, :update]
 

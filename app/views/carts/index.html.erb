@@ -6,6 +6,7 @@
 
         <thead>
 
+          <tr>
             <th>チェック欄</th>
             <th>商品名</th>
             <th>アーティスト名</th>
@@ -29,8 +30,6 @@
                     <td><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></td>
                   </tr>
                 <% end %>
-
-                <%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %>
               </td>
 
             <% end %>
