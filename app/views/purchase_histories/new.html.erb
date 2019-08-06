@@ -3,23 +3,29 @@
 
 <h1>購入確認画面</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>ジャケ写</th>
       <th>シングルアルバム名</th>
+      <th>アーティスト名</th>
       <th>枚数</th>
       <th>小計</th>
+      <th>総計</th>
     </tr>
   </thead>
   <tbody>
     <% @carts.each do |cart| %>
       <% if cart.check == true %>
         <tr>
+          <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
           <td><%= cart.product.single_album_name %></td>
           <td><%= cart.product.artist.artist_name %></td>
           <td><%= cart.purchase_quantity %></td>
-          <td><%= cart.product.price %></td>
+          <% sub_total = cart.product.price * cart.purchase_quantity %>
+          <td><%= sub_total %></td>
+          <% sum =+ sub_total %>
+          <td><%= sum %></td>
         </tr>
       <% end %>
     <% end %>

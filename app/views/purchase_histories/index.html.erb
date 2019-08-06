@@ -9,11 +9,10 @@
   </thead>
 
   <tbody>
-    
   <% @purchase_histories.each do |purchase_history| %>
   <% binding.pry %>
     <tr>
-      <td><%= attachment_image_tag purchase_history.purchase_products, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'200x200' %></td>
+      <td><%= attachment_image_tag purchase_history.products, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'200x200' %></td>
       <td><%= link_to purchase_history.single_album_name, purchase_history_path(purchase_history) %></td>
       <td><%= purchase_history.artist.artist_name %></td>
     </tr>
@@ -24,3 +23,4 @@
 </table>
 
 <%= paginate @purchase_histories, class: "paginate" %>
+
