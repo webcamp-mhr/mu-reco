@@ -3,6 +3,7 @@
 
 <h1>購入確認画面</h1>
 
+
 <table class="table">
   <thead>
     <tr>
@@ -14,8 +15,10 @@
       <th>総計</th>
     </tr>
   </thead>
+
+
+  <% @carts.each do |cart| %>
   <tbody>
-    <% @carts.each do |cart| %>
       <% if cart.check == true %>
         <tr>
           <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
@@ -27,10 +30,14 @@
           <% sum =+ sub_total %>
           <td><%= sum %></td>
         </tr>
-      <% end %>
     <% end %>
   </tbody>
+  <% end %>
 </table>
+
+
+
+
 
 <%= form_for @purchase_history do |f| %>
 
@@ -46,6 +53,7 @@
       <%= f.radio_button :delivery_status, '3' %> 出荷済み
     </label>
   </div>
+
 
   <div>
     <h4>支払い選択</h4>
@@ -63,4 +71,5 @@
   <%= f.submit '購入確定' %>
 
 <% end %>
+
 

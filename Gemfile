@@ -74,4 +74,7 @@ gem 'jquery-rails'
 gem 'cocoon'
 gem 'paranoia'
 
+gem 'hirb'
+gem 'hirb-unicode'
+
 

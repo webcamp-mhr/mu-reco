@@ -5,6 +5,7 @@ class PurchaseHistoriesController < ApplicationController
 
 	def show
 		@purchase_history = PurchaseHistory.find(params[:id])
+		@purchase_products = PurchaseProduct.all
 	end
 
 	def edit
@@ -25,6 +26,7 @@ class PurchaseHistoriesController < ApplicationController
 		@purchase_history.save
 		@carts = Cart.all
     @purchase_product = PurchaseProduct.new
+    @purchase_product.purchase_history_id = @purchase_history.id
     @carts.each do |cart|
       if cart.check == true   #チェックがついてる場合
         @purchase_product.single_album_name = cart.product.single_album_name
@@ -35,6 +37,7 @@ class PurchaseHistoriesController < ApplicationController
         @purchase_product.genre_name = cart.product.genre.genre_name
         @purchase_product.purchase_quantity = cart.purchase_quantity
         @purchase_product.subtotal = cart.product.price
+        @purchase_product.save
       end
     end
     if @purchase_product.save

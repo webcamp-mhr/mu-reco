@@ -1,20 +1,24 @@
 <h1>購入履歴ページ</h1>
 
-<thead>
+<table class="table">
+  <thead>
     <tr>
-      <th>ジャケット画像</th>
-      <th>商品名</th>
-      <th>アーティスト名</th>
+      <th>会計番号</th>
+      <th>購入日</th>
+      <th>総計</th>
+      <th>配送ステータス</th>
     </tr>
   </thead>
 
   <tbody>
   <% @purchase_histories.each do |purchase_history| %>
-  <% binding.pry %>
     <tr>
-      <td><%= attachment_image_tag purchase_history.products, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'200x200' %></td>
-      <td><%= link_to purchase_history.single_album_name, purchase_history_path(purchase_history) %></td>
-      <td><%= purchase_history.artist.artist_name %></td>
+      <td><%= link_to purchase_history.id, purchase_history_path(purchase_history.id) %></td>
+      <td><%= purchase_history.created_at %></td>
+      <td><%= purchase_history.total_price %></td>
+      <td><%= purchase_history.delivery_status %></td>
+
+
     </tr>
   </tbody>
 
