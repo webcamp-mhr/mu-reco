@@ -1,11 +1,11 @@
-<h1>購入履歴ページ</h1>
+<h1>購入履歴</h1>
 
 <table class="table">
   <thead>
     <tr>
       <th>会計番号</th>
       <th>購入日</th>
-      <th>総計</th>
+      <th>総計(送料500円込み)</th>
       <th>配送ステータス</th>
     </tr>
   </thead>
@@ -14,9 +14,19 @@
   <% @purchase_histories.each do |purchase_history| %>
     <tr>
       <td><%= link_to purchase_history.id, purchase_history_path(purchase_history.id) %></td>
-      <td><%= purchase_history.created_at %></td>
-      <td><%= purchase_history.total_price %></td>
-      <td><%= purchase_history.delivery_status %></td>
+      <td><%= purchase_history.created_at.strftime('%Y/%m/%d') %></td>
+      <td><%= purchase_history.total_price %>円</td>
+      <td>
+        <% if purchase_history.delivery_status == 1 %>
+          受付中
+        <% elsif purchase_history.delivery_status == 2 %>
+          商品準備中
+        <% elsif purchase_history.delivery_status == 3 %>
+          出荷済み
+        <% else %>
+          エラー
+        <% end %>
+      </td>
 
 
     </tr>

@@ -25,10 +25,8 @@
           <td><%= cart.product.single_album_name %></td>
           <td><%= cart.product.artist.artist_name %></td>
           <td><%= cart.purchase_quantity %></td>
-          <% sub_total = cart.product.price * cart.purchase_quantity %>
-          <td><%= sub_total %></td>
-          <% sum =+ sub_total %>
-          <td><%= sum %></td>
+          <td><%= cart.product.price %></td>
+          <td><%= cart.product.price * cart.purchase_quantity %></td>
         </tr>
     <% end %>
   </tbody>
@@ -41,18 +39,8 @@
 
 <%= form_for @purchase_history do |f| %>
 
-  <div>
-    <h4>お届け先の選択</h4>
-    <label>
-      <%= f.radio_button :delivery_status, '1' %> 受付中
-    </label>
-    <label>
-      <%= f.radio_button :delivery_status, '2' %> 商品準備中
-    </label>
-    <label>
-      <%= f.radio_button :delivery_status, '3' %> 出荷済み
-    </label>
-  </div>
+  <!--  配送ステータス「受付中(＝1)を送信」 -->
+  <%= f.hidden_field :delivery_status, :value => '1' %>
 
 
   <div>

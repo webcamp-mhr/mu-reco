@@ -10,7 +10,7 @@
             <th>チェック欄</th>
             <th>商品名</th>
             <th>アーティスト名</th>
-            <th>価格（税込）</th>
+            <th>単体価格（税込）</th>
             <th>購入数</th>
           </tr>
         </thead>
@@ -23,7 +23,7 @@
                     <td><%= f.check_box :check %></td>
                     <td><%= cart.product.single_album_name %></td>
                     <td><%= cart.product.artist.artist_name %></td>
-                    <td><%= (cart.product.price * cart.purchase_quantity).floor %>円</td>
+                    <td><%= cart.product.price %>円</td>
                     <td><%= f.number_field :purchase_quantity, autofocus: true, :size => "4*2" %> 枚</td>
                     <td><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></td>
                   </tr>
