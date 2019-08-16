@@ -29,6 +29,8 @@ resources :songs_titles, only: [:create, :destroy, :update, :new]
 
 resources :purchase_products, only: [:create]
 
+# delete '/carts' => 'carts#destroy_all'
+
 
 end
 

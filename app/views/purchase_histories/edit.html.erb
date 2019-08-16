@@ -1,2 +1,79 @@
-<h1>PurchasesHistories#edit</h1>
-<p>Find me in app/views/purchases_histories/edit.html.erb</p>
+
+<h2>購入履歴編集</h2>
+  <table class="table">
+    <thead>
+      <tr align="center">
+        <th>シングルアルバム名</th>
+        <th>ジャケット画像</th>
+        <th>アーティスト名</th>
+        <th>レーベル名</th>
+        <th>ジャンル名</th>
+        <th>在庫数</th>
+        <th>値段（税込）</th>
+      </tr>
+    </thead>
+
+    <% @purchase_products.each do |purchase_product| %>
+
+
+    <% if purchase_product.purchase_history_id == @purchase_history.id %>
+
+    <tbody>
+      <tr>
+        <td><%= purchase_product.single_album_name %></td>
+        <td><%= attachment_image_tag @product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></td>
+        <td><%= purchase_product.artist_name %></td>
+        <td><%= purchase_product.label_name %></td>
+        <td><%= purchase_product.genre_name %></td>
+        <td><%= purchase_product.purchase_quantity %></td>
+        <td><%= purchase_product.subtotal %></td>
+      </tr>
+    </tbody>
+
+    <% end %>
+    <% end %>
+  </table>
+
+  <h4>購入日</h4>
+  <p><%= @purchase_history.created_at %></p>
+
+  <h4>総計</h4>
+  <p><%= @purchase_history.total_price %></p>
+
+  <h4>配送先住所</h4>
+
+
+<%= form_for @purchase_history do |f| %>
+
+  <div>
+    <h4>配送ステータス</h4>
+    <label>
+      <%= f.radio_button :delivery_status, '1' %> 受付中
+    </label>
+    <label>
+      <%= f.radio_button :delivery_status, '2' %> 商品準備中
+    </label>
+    <label>
+      <%= f.radio_button :delivery_status, '3' %> 出荷済み
+    </label>
+  </div>
+
+
+  <div>
+    <h4>支払い選択</h4>
+    <label>
+      <%= f.radio_button :payment_status, '1' %> 銀行振込
+    </label>
+    <label>
+      <%= f.radio_button :payment_status, '2' %> クレジットカード
+    </label>
+    <label>
+      <%= f.radio_button :payment_status, '3' %> 代引
+    </label>
+  </div>
+
+  <%= f.submit '購入確定' %>
+
+<% end %>
+
+
