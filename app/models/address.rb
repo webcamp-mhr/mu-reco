@@ -4,3 +4,4 @@ class Address < ApplicationRecord
   validates :address_priority, numericality: { greater_than: 0 }
   belongs_to :user
 end
+

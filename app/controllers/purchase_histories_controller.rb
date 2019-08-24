@@ -17,8 +17,6 @@ class PurchaseHistoriesController < ApplicationController
     # binding.pry
 	end
 
-
-
 	def create
 		@purchase_history = PurchaseHistory.new(purchase_history_params)
 		@purchase_history.user_id = current_user.id
