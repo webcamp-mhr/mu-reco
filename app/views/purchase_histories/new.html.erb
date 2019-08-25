@@ -18,18 +18,18 @@
 
 
   <% @carts.each do |cart| %>
-  <tbody>
-      <% if cart.check == true %>
-        <tr>
-          <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
-          <td><%= cart.product.single_album_name %></td>
-          <td><%= cart.product.artist.artist_name %></td>
-          <td><%= cart.purchase_quantity %></td>
-          <td><%= cart.product.price %></td>
-          <td><%= cart.product.price * cart.purchase_quantity %></td>
-        </tr>
-    <% end %>
-  </tbody>
+    <tbody>
+        <% if cart.check == true %>
+          <tr>
+            <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
+            <td><%= cart.product.single_album_name %></td>
+            <td><%= cart.product.artist.artist_name %></td>
+            <td><%= cart.purchase_quantity %></td>
+            <td><%= cart.product.price %></td>
+            <td><%= cart.product.price * cart.purchase_quantity %></td>
+          </tr>
+      <% end %>
+    </tbody>
   <% end %>
 </table>
 
@@ -42,6 +42,16 @@
   <!--  配送ステータス「受付中(＝1)を送信」 -->
   <%= f.hidden_field :delivery_status, :value => '1' %>
 
+  <div>
+    <h4>お届け先の選択</h4>
+    <% current_user.addresses.each do |address| %>
+      <label>
+        <!-- ラジオボタンが１つしか値を送信できない？ため購入時の選択した住所Idを渡す -->
+        <%= f.radio_button :purchase_address_id, address.id %>
+        <%= address.postcode %> / <%= address.address %>
+      </label>
+    <% end %>
+  </div>
 
   <div>
     <h4>支払い選択</h4>

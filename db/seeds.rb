@@ -12,6 +12,10 @@ Administrator.create(email: 'masaki@gmail.com', password: 'masaki')
 User.create(email: 'a@a', password: 'aaaaaa', user_lastname: 'masaki', user_firstname: 'matsumura', user_lastname_kana: 'マサキ', user_firstname_kana: 'マツムラ', phone_number: '08011110000')
 User.create(email: 'b@b', password: 'bbbbbb', user_lastname: 'b', user_firstname: 'b', user_lastname_kana: 'b', user_firstname_kana: 'b', phone_number: '08011112222')
 
+Address.create(user_id: '1', postcode: '1000001', address: '東京都千代田区1-1', address_priority: '1')
+Address.create(user_id: '1', postcode: '7777777', address: '東京都ラッキー7区1-1', address_priority: '2')
+Address.create(user_id: '2', postcode: '9999999', address: '大阪府西成区ホームレス', address_priority: '1')
+
 Genre.create!(
   [{
       genre_name: 'マサキ-POP'

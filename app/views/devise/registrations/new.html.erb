@@ -23,9 +23,12 @@
     <%= f.text_field :user_lastname_kana, autofocus: true, autocomplete: "user_lastname_kana" %>
   </div>
 
-  <%= f.fields_for :addresses do |address| %>
-  <%= render 'address_fields', f: address %>
-  <% end %>
+
+  <div class="field">
+    <%= f.fields_for :addresses do |address| %>
+    <%= render 'address_fields', f: address %>
+    <% end %>
+  </div>
 
 
   <div class="field">

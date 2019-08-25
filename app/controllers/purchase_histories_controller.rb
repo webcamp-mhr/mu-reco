@@ -14,13 +14,14 @@ class PurchaseHistoriesController < ApplicationController
 	def new
 		@carts = Cart.all
 		@purchase_history = PurchaseHistory.new
-    # binding.pry
 	end
 
 	def create
 		@purchase_history = PurchaseHistory.new(purchase_history_params)
 		@purchase_history.user_id = current_user.id
-		# @purchase_history.address_id = current_user.address.id
+    #購入時の選択した住所idを元に郵便番号と住所を購入履歴テーブルのカラムに代入している
+    @purchase_history.purchase_postcode = current_user.addresses.find(@purchase_history.purchase_address_id).postcode
+    @purchase_history.purchase_address = current_user.addresses.find(@purchase_history.purchase_address_id).address
     @purchase_history.total_price = 0  #初期値
     @purchase_history.save #一度保存(purchase_history_idに代入する為)
 
@@ -45,7 +46,7 @@ class PurchaseHistoriesController < ApplicationController
       end
     end
     @purchase_history.total_price += 500  #送料分込み
-    
+
     if @purchase_history.save && @purchase_product.save
       redirect_to products_path
     else
@@ -59,6 +60,6 @@ class PurchaseHistoriesController < ApplicationController
 	private
 
     def purchase_history_params
-      params.require(:purchase_history).permit(:delivery_status, :payment_status)
+      params.require(:purchase_history).permit(:delivery_status, :payment_status, :purchase_address_id)
     end
 end

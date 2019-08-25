@@ -9,7 +9,7 @@
 			<th>セイ</th>
 			<th>メイ</th>
 			<th>電話番号</th>
-			<th>郵便番号 / 住所(優先番号)</th>
+			<th>郵便番号 / 住所(メイン)</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,9 +21,11 @@
 			<td><%= @user.phone_number %></td>
 			<td>
 				<% @user.addresses.each do |address| %>
-				  <%= address.postcode %>
-				  <%= address.address %>
-				  (<%= address.address_priority %>)<br>
+					<!-- 優先番号「1」のメイン住所のみ表示 -->
+					<% if address.address_priority == 1 %>
+				  	<%= address.postcode %>
+				  	<%= address.address %>
+				  <% end %>
 				<% end %>
 			</td>
 
