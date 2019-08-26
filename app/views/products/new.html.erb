@@ -1,52 +1,49 @@
 
-<h1>商品新規追加</h1>
+<div class="col-md-6 col-md-offset-3">
+  <h1>商品新規追加</h1>
 
-<%= form_for @product do |f| %>
-  <h4>シングルアルバム名</h4>
-  <%= f.text_field :single_album_name %>
+  <%= form_for @product do |f| %>
+      <h4>シングルアルバム名</h4>
+      <%= f.text_field :single_album_name, class: "col-md-6" %><br>
 
-  <h4>ジャケット画像</h4>
-  <%= f.attachment_field :jacket_image %><br>
+    <h4>ジャケット画像</h4>
+    <%= f.attachment_field :jacket_image, class: "col-md-6" %><br>
 
-  <h4>アーティスト名</h4>
-  <%= f.collection_select :artist_id, Artist.all, :id, :artist_name, :prompt => true %>
-  <%= link_to "アーティスト名追加", new_artist_path %>
+    <h4>アーティスト名</h4>
+    <%= f.collection_select :artist_id, Artist.all, :id, :artist_name, :prompt => true, class: "col-md-6" %>
+    <%= link_to "アーティスト名追加", new_artist_path %>
 
-  <h4>レーベル名</h4>
-  <%= f.collection_select :label_id, Label.all, :id, :label_name, :prompt => true %>
-  <%= link_to "レーベル名追加", new_label_path %>
+    <h4>レーベル名</h4>
+    <%= f.collection_select :label_id, Label.all, :id, :label_name, :prompt => true, class: "col-md-6" %>
+    <%= link_to "レーベル名追加", new_label_path %>
 
-  <h4>ジャンル</h4>
-  <%= f.collection_select :genre_id, Genre.all, :id, :genre_name, :prompt => true %>
-  <%= link_to "ジャンル追加", new_genre_path %>
+    <h4>ジャンル</h4>
+    <%= f.collection_select :genre_id, Genre.all, :id, :genre_name, :prompt => true, class: "col-md-6" %>
+    <%= link_to "ジャンル追加", new_genre_path %>
 
-  <h4>在庫数</h4>
-  <%= f.number_field :stock_quantity %><br>
+    <h4>在庫数</h4>
+    <%= f.number_field :stock_quantity, class: "col-md-6" %><br>
+    <label>
+      <%= f.radio_button :sales_status, true%> 販売中
+    </label>
+    <label>
+      <%= f.radio_button :sales_status, false %> 販売停止中
+    </label><br>
 
-  <label>
-    <%= f.radio_button :sales_status, true %> 販売中
-  </label>
-  <label>
-    <%= f.radio_button :sales_status, false %> 販売停止中
-  </label><br>
+    <h4>価格(税別価格)</h4>
+    <%= f.number_field :price, class: "col-md-6" %> 円
 
-  <h4>価格(税別価格)</h4>
-  <%= f.number_field :price %> 円
-
-  <h4>ディスク</h4>
-  <%= f.fields_for :discs do |disc| %>
-    <%= render 'disc_fields', f: disc %>
+    <h4>ディスク</h4>
+    <%= f.fields_for :discs do |disc| %>
+      <%= render 'disc_fields', f: disc, class: "col-md-6" %>
+    <% end %>
+    <div>
+      <%= link_to_add_association 'ディスク追加',f, :discs, class: "col-md-6" %>
+    </div>
+    <br>
+    <%= f.submit "追加" %>
   <% end %>
-  <div>
-    <%= link_to_add_association 'ディスク追加',f, :discs %>
-  </div>
-  <br>
-  <%= f.submit "追加" %>
-<% end %>
-<%= link_to '戻る', products_path %>
-
-
-
-
+  <%= link_to '戻る', products_path %>
+</div>
 
 

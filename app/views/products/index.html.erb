@@ -1,38 +1,26 @@
 
+<div class="index">
+	<%= search_form_for @q do |f| %>
+	  <%= f.search_field :single_album_name_cont %>
 
-<h1>商品一覧ページ</h1>
-
-<%= search_form_for @q do |f| %>
-  <%= f.label :name, "Keyword" %>
-  <%= f.search_field :single_album_name_cont %>
-
-  <%= f.submit "検索" %>
-<% end %>
-
-<table class="table">
-
-
-	<thead>
-		<tr>
-			<th>ジャケット画像</th>
-			<th>CD名</th>
-			<th>アーティスト名</th>
-		</tr>
-	</thead>
-
-	<tbody>
-	<% @products.each do |product| %>
-
-		<tr>
-			<td><%= attachment_image_tag product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'200x200' %></td>
-			<td><%= link_to product.single_album_name, product_path(product) %></td>
-			<td><%= product.artist.artist_name %></td>
-		</tr>
-	</tbody>
-
+	  <%= f.submit "検索", class: "btn btn-default"%>
 	<% end %>
+</div>
 
-</table>
+<% @products.each do |product| %>
+	<div class="index">
+		<%= link_to product_path(product) do %>
+		<span class="image">
+			<%= attachment_image_tag product, :jacket_image, :fill, 1200, 1200, format: 'jpeg', fallback: "no_image.jpg", size:'740x740', style: "border-radius: 6px;"%><br>
+		</span>
+			<p class="name">
+				<%=  product.single_album_name %>
+				/
+				<%= product.artist.artist_name %>
+			</p>
+		<% end %>
+	</div>
+<% end %>
 
 <%= paginate @products, class: "paginate" %>
 

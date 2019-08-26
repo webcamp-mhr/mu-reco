@@ -15,3 +15,81 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+.index {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 80px;
+	border-radius: 50px;
+
+	p {
+		font-size: 20px;
+		font-family: 'HanziPen TC',sans-serif;
+		opacity: 0;
+		margin-top: 7px;
+		display: inline-block;
+		opacity: 0.5;
+		text-decoration:none;
+		color: gray;
+	}
+}
+
+.content {
+	width: 100%;
+	margin: 100px
+}
+
+.detail {
+	
+	p {
+			font-size: 17px;
+			font-family: 'HanziPen TC',sans-serif;
+			opacity: 1;
+			margin-top: 10px;
+			display: inline-block;
+	}
+}
+
+.mu-reco {
+	text-decoration: none;
+	color: white;
+	font-size: 30px;
+}
+
+.kago {
+	margin: 0 auto;
+	height: 300px
+}
+
+#botan {
+	display: inline-block;
+	float: left;
+	margin: 30px 200px;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
