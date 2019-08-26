@@ -1,4 +1,7 @@
 class PurchaseHistoriesController < ApplicationController
+
+  before_action :check_check, only: [:new]
+
 	def index
 		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order
 	end
@@ -14,6 +17,7 @@ class PurchaseHistoriesController < ApplicationController
 	def new
 		@carts = Cart.all
 		@purchase_history = PurchaseHistory.new
+
     @purchase_history.total_price = 0  #初期値
     @carts.each do |cart|
       if cart.check == true   #チェックがついてる場合
@@ -21,6 +25,7 @@ class PurchaseHistoriesController < ApplicationController
       end
     end
     @purchase_history.total_price += 500  #送料分込み
+
 	end
 
 	def create
@@ -69,5 +74,12 @@ class PurchaseHistoriesController < ApplicationController
 
     def purchase_history_params
       params.require(:purchase_history).permit(:delivery_status, :payment_status, :purchase_address_id)
+    end
+
+    def check_check
+      carts = Cart.where(check: 1)
+        if carts.count == 0
+          redirect_to carts_path
+        end
     end
 end

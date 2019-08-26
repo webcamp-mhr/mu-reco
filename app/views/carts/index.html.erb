@@ -10,10 +10,12 @@
             <th>チェック欄</th>
             <th>商品名</th>
             <th>アーティスト名</th>
+            <th>販売ステータス</th>
             <th>単体価格（税込）</th>
             <th>購入数</th>
           </tr>
         </thead>
+
 
 
         <tbody>
@@ -24,16 +26,23 @@
                     <td><%= f.check_box :check %></td>
                     <td><%= cart.product.single_album_name %></td>
                     <td><%= cart.product.artist.artist_name %></td>
+                    <td>
+                      <% if cart.product.sales_status == true %>
+                        販売中
+                      <% else %>
+                        販売停止中
+                      <% end %>
+                    </td>
                     <td><%= cart.product.price %>円</td>
-                    <td><%= f.number_field :purchase_quantity, autofocus: true, :size => "4*2" %> 枚</td>
+                    <td><%= f.number_field :purchase_quantity, min: 1, autofocus: true, :size => "4*2" %> 枚</td>
                     <td><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></td>
                   </tr>
                 <% end %>
-              </td>
-          <% end %>
-          <p><%= submit_tag '購入確認' %></p>
-          </tr>
-        </thead>
+                </td>
+            <% end %>
+            <p><%= submit_tag '購入確認' %></p>
+            </tr>
+          </thead>
 
         </tbody>
 
