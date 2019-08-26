@@ -12,7 +12,6 @@
       <th>アーティスト名</th>
       <th>枚数</th>
       <th>小計</th>
-      <th>総計</th>
     </tr>
   </thead>
 
@@ -24,14 +23,31 @@
             <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
             <td><%= cart.product.single_album_name %></td>
             <td><%= cart.product.artist.artist_name %></td>
-            <td><%= cart.purchase_quantity %></td>
-            <td><%= cart.product.price %></td>
-            <td><%= cart.product.price * cart.purchase_quantity %></td>
+            <td><%= cart.purchase_quantity %>枚</td>
+            <td>
+              <%= cart.product.price * cart.purchase_quantity %>円
+            </td>
           </tr>
       <% end %>
     </tbody>
   <% end %>
 </table>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <td>送料</td>
+      <td>500円</td>
+    </tr>
+    <tr>
+      <td>総計</td>
+      <td><%= @purchase_history.total_price %>円
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>総計</h2>
 
 
 
