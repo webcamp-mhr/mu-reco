@@ -17,6 +17,7 @@
 
 
         <tbody>
+
             <% current_user.carts.each do |cart| %>
                 <%= fields_for('carts[]', cart) do |f| %>
                   <tr>

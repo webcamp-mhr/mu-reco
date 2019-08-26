@@ -17,6 +17,7 @@
 			<th>ジャケット画像</th>
 			<th>CD名</th>
 			<th>アーティスト名</th>
+			<th>在庫状況</th>
 		</tr>
 	</thead>
 
@@ -27,6 +28,14 @@
 			<td><%= attachment_image_tag product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'200x200' %></td>
 			<td><%= link_to product.single_album_name, product_path(product) %></td>
 			<td><%= product.artist.artist_name %></td>
+			<!-- 在庫状況に応じる -->
+			<% if product.stock_quantity >= 10 %>
+				<td>◯</td>
+			<% elsif product.stock_quantity >= 1 %>
+				<td>△</td>
+			<% else %>
+				<td>✖︎</td>
+			<% end %>
 		</tr>
 	</tbody>
 

@@ -29,11 +29,10 @@ class CartsController < ApplicationController
 	# PATCH(PUT) /carts/all
 	def update_all
 	  params.permit!
-	  # binding.pry
 	  params[:carts].keys.each do |quantity|
 	    @cart = Cart.find(quantity.to_i)
 	    @cart.update(params[:carts][quantity])
-	  end
+	    	# render action: :index
 	  redirect_to new_purchase_history_path
 	end
 

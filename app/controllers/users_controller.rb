@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
-
+		# 退会済みユーザーも取得
+		@user = User.with_deleted.find(params[:id])
 	end
 
 	def edit

@@ -10,6 +10,7 @@
 			<th>メイ</th>
 			<th>電話番号</th>
 			<th>郵便番号 / 住所(メイン)</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,15 +29,20 @@
 				  <% end %>
 				<% end %>
 			</td>
-
+			<!-- 退会していたら表示 -->
+			<% if @user.deleted_at %>
+				<td>退会済み( <%= @user.deleted_at.strftime('%Y/%m/%d')%> )</td>
+			<% end %>
 		</tr>
 	</tbody>
 </table>
 
-
-<p>
-  <%= link_to '編集', edit_user_path(@user) %>
-  <%= link_to '退会', user_path(@user), method: :delete, "data-confirm" => "Are you sure?" %>
-</p>
+<!-- 退会してない場合のみ表示 -->
+<% if @user.deleted_at.nil? %>
+	<p>
+	  <%= link_to '編集', edit_user_path(@user) %>
+	  <%= link_to '退会', user_path(@user), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+	</p>
+<% end %>
 
 <%= link_to '購入履歴', purchase_histories_path, class:"btn btn-primary col-xs-5" %>
