@@ -39,7 +39,7 @@ class PurchaseHistoriesController < ApplicationController
 
 		carts = Cart.all
     carts.each do |cart|
-      if cart.check == true   #チェックがついてる場合
+      if cart.check == true && cart.purchase_quantity >= cart.product.stock_quantity #チェックがついてる場合 && 購入枚数より在庫の方が多い場合
         @purchase_product = PurchaseProduct.new
         @purchase_product.purchase_history_id = @purchase_history.id
         @purchase_product.single_album_name = cart.product.single_album_name
@@ -51,7 +51,8 @@ class PurchaseHistoriesController < ApplicationController
         @purchase_product.purchase_quantity = cart.purchase_quantity
         @purchase_product.subtotal = cart.product.price
         @purchase_history.total_price += cart.product.price * cart.purchase_quantity  #総計
-        if @purchase_product.save
+        cart.product.stock_quantity -= cart.purchase_quantity #購入分を在庫から減らす
+        if @purchase_product.save && cart.product.save
           #チェックした商品をカートから削除する
           cart.destroy
         end
