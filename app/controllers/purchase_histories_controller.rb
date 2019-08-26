@@ -18,6 +18,13 @@ class PurchaseHistoriesController < ApplicationController
 		@carts = Cart.all
 		@purchase_history = PurchaseHistory.new
 
+    @purchase_history.total_price = 0  #初期値
+    @carts.each do |cart|
+      if cart.check == true   #チェックがついてる場合
+        @purchase_history.total_price += cart.product.price * cart.purchase_quantity  #総計
+      end
+    end
+    @purchase_history.total_price += 500  #送料分込み
 
 	end
 
@@ -43,7 +50,7 @@ class PurchaseHistoriesController < ApplicationController
         @purchase_product.genre_name = cart.product.genre.genre_name
         @purchase_product.purchase_quantity = cart.purchase_quantity
         @purchase_product.subtotal = cart.product.price
-        @purchase_history.total_price += cart.product.price  #総計
+        @purchase_history.total_price += cart.product.price * cart.purchase_quantity  #総計
         if @purchase_product.save
           #チェックした商品をカートから削除する
           cart.destroy
