@@ -1,4 +1,7 @@
 class PurchaseHistoriesController < ApplicationController
+
+  before_action :check_check, only: [:new]
+
 	def index
 		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order
 	end
@@ -14,6 +17,15 @@ class PurchaseHistoriesController < ApplicationController
 	def new
 		@carts = Cart.all
 		@purchase_history = PurchaseHistory.new
+
+    @purchase_history.total_price = 0  #初期値
+    @carts.each do |cart|
+      if cart.check == true   #チェックがついてる場合
+        @purchase_history.total_price += cart.product.price * cart.purchase_quantity  #総計
+      end
+    end
+    @purchase_history.total_price += 500  #送料分込み
+
 	end
 
 	def create
@@ -27,7 +39,7 @@ class PurchaseHistoriesController < ApplicationController
 
 		carts = Cart.all
     carts.each do |cart|
-      if cart.check == true   #チェックがついてる場合
+      if cart.check == true && cart.purchase_quantity >= cart.product.stock_quantity #チェックがついてる場合 && 購入枚数より在庫の方が多い場合
         @purchase_product = PurchaseProduct.new
         @purchase_product.purchase_history_id = @purchase_history.id
         @purchase_product.single_album_name = cart.product.single_album_name
@@ -38,8 +50,9 @@ class PurchaseHistoriesController < ApplicationController
         @purchase_product.genre_name = cart.product.genre.genre_name
         @purchase_product.purchase_quantity = cart.purchase_quantity
         @purchase_product.subtotal = cart.product.price
-        @purchase_history.total_price += cart.product.price  #総計
-        if @purchase_product.save
+        @purchase_history.total_price += cart.product.price * cart.purchase_quantity  #総計
+        cart.product.stock_quantity -= cart.purchase_quantity #購入分を在庫から減らす
+        if @purchase_product.save && cart.product.save
           #チェックした商品をカートから削除する
           cart.destroy
         end
@@ -61,5 +74,12 @@ class PurchaseHistoriesController < ApplicationController
 
     def purchase_history_params
       params.require(:purchase_history).permit(:delivery_status, :payment_status, :purchase_address_id)
+    end
+
+    def check_check
+      carts = Cart.where(check: 1)
+        if carts.count == 0
+          redirect_to carts_path
+        end
     end
 end

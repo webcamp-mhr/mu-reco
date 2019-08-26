@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :carts
   has_many :purchases_histories
 
+  #論理削除
   acts_as_paranoid
 
 
