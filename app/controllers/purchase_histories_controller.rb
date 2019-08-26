@@ -1,4 +1,7 @@
 class PurchaseHistoriesController < ApplicationController
+
+  before_action :check_check, only: [:new]
+
 	def index
 		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order
 	end
@@ -14,6 +17,8 @@ class PurchaseHistoriesController < ApplicationController
 	def new
 		@carts = Cart.all
 		@purchase_history = PurchaseHistory.new
+
+
 	end
 
 	def create
@@ -61,5 +66,12 @@ class PurchaseHistoriesController < ApplicationController
 
     def purchase_history_params
       params.require(:purchase_history).permit(:delivery_status, :payment_status, :purchase_address_id)
+    end
+
+    def check_check
+      carts = Cart.where(check: 1)
+        if carts.count == 0
+          redirect_to carts_path
+        end
     end
 end
