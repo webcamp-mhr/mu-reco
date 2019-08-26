@@ -9,10 +9,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <header class = "navbar navbar-default" style="background-color:pink;">
+  <header class = "navbar navbar-default" style="background-color:black;">
       <div class = "container">
         <nav class = "nav navbar-nav navbar-left" >
-          <span style="color: white; font-size: 30px; ">mu-reco</span>
+          <%= link_to root_path do %>
+            <span class="mu-reco">
+              mu-reco
+            </span>
+          <% end %>
         </nav>
         <nav>
           <ul class="nav navbar-nav navbar-right" >

@@ -5,6 +5,8 @@
     <tr>
       <th>会計番号</th>
       <th>購入日</th>
+
+      <th>総計(送料500円込み)</th>
       <th>総計(送料込み)</th>
       <th>配送ステータス</th>
     </tr>
@@ -13,6 +15,7 @@
   <tbody>
   <% @purchase_histories.each do |purchase_history| %>
     <tr>
+      <% if administrator_signed_in? || current_user.id == purchase_history.user.id %>
       <td><%= link_to purchase_history.id, purchase_history_path(purchase_history.id) %></td>
       <td><%= purchase_history.created_at.strftime('%Y/%m/%d') %></td>
       <td><%= purchase_history.total_price %>円</td>
@@ -30,7 +33,7 @@
       <td>
         <%= link_to '詳細', purchase_history_path(purchase_history) %>
       </td>
-
+      <% end %>
     </tr>
   </tbody>
 

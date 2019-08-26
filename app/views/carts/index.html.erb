@@ -8,6 +8,7 @@
 
           <tr>
             <th>チェック欄</th>
+            <th>ジャケット画像</th>
             <th>商品名</th>
             <th>アーティスト名</th>
             <th>販売ステータス</th>
@@ -23,7 +24,8 @@
             <% current_user.carts.each do |cart| %>
                 <%= fields_for('carts[]', cart) do |f| %>
                   <tr>
-                    <td><%= f.check_box :check %></td>
+                    <td><%= f.check_box :check ,style:"transform: scale(1.5);"%></td>
+                    <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 70, 70, format: 'jpeg', fallback: "no_image.jpg", size:'70x70' %></td>
                     <td><%= cart.product.single_album_name %></td>
                     <td><%= cart.product.artist.artist_name %></td>
                     <td>
