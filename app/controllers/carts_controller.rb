@@ -33,6 +33,7 @@ class CartsController < ApplicationController
 	    @cart = Cart.find(quantity.to_i)
 	    @cart.update(params[:carts][quantity])
 	    	# render action: :index
+	  end
 	  redirect_to new_purchase_history_path
 	end
 
