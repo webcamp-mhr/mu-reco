@@ -17,7 +17,6 @@ class PurchaseHistoriesController < ApplicationController
 	def new
 		@carts = Cart.all
 		@purchase_history = PurchaseHistory.new
-
     @purchase_history.total_price = 0  #初期値
     @carts.each do |cart|
       if cart.check == true   #チェックがついてる場合
@@ -25,7 +24,6 @@ class PurchaseHistoriesController < ApplicationController
       end
     end
     @purchase_history.total_price += 500  #送料分込み
-
 	end
 
 	def create
@@ -39,7 +37,7 @@ class PurchaseHistoriesController < ApplicationController
 
 		carts = Cart.all
     carts.each do |cart|
-      if cart.check == true && cart.purchase_quantity >= cart.product.stock_quantity #チェックがついてる場合 && 購入枚数より在庫の方が多い場合
+      if cart.check == true && (cart.purchase_quantity <= cart.product.stock_quantity) #チェックがついてる場合 && 購入枚数より在庫の方が多い場合
         @purchase_product = PurchaseProduct.new
         @purchase_product.purchase_history_id = @purchase_history.id
         @purchase_product.single_album_name = cart.product.single_album_name
@@ -60,7 +58,7 @@ class PurchaseHistoriesController < ApplicationController
     end
     @purchase_history.total_price += 500  #送料分込み
 
-    if @purchase_history.save && @purchase_product.save
+    if @purchase_history.save
       redirect_to products_path
     else
       render new_purchase_history_path

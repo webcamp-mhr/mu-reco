@@ -24,7 +24,11 @@
 		<div class="col-md-5">
 			<% if @product.stock_quantity >= 1 %> <!-- 在庫が0のとき -->
 				<% if @product.sales_status == true %>
-					<p>販売中</p><br>
+					<% if @product.stock_quantity <= 10 %>
+						<p>販売中(残りわずか	！売り切れ御免)</p><br>
+					<% else %>
+						<p>販売中</p><br>
+					<% end %>
 				<% elsif @product.sales_status == false %>
 					<p style="color: red;">販売停止中です。ごめんなさい。</p><br>
 				<% end %>
@@ -57,10 +61,12 @@
 
 		<p id="botan">
 		  <%= link_to '戻る', products_path(@user) %>
-		  <%= form_for(@cart) do |f| %>
-			  <%= f.hidden_field :product_id, :value => @product.id %>
-			  <%= f.submit "カゴへ追加", class: "btn btn-large btn-primary" %>
-		  <% end %>
+		  <% if @product.stock_quantity >= 1 %><!-- 在庫が0のとき -->
+			  <%= form_for(@cart) do |f| %>
+				  <%= f.hidden_field :product_id, :value => @product.id %>
+				  <%= f.submit "カゴへ追加", class: "btn btn-large btn-primary" %>
+			  <% end %>
+			<% end %>
 		</p>
 	<% end %>
 </div>
