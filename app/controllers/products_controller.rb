@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+
+  before_action :addmin_user_check, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true).page(params[:page]).reverse_order
@@ -54,6 +57,12 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:single_album_name, :jacket_image, :price, :stock_quantity, :sales_status, :artist_id, :label_id, :genre_id, :jacket_image, discs_attributes: [:id, :disc_name, :_destroy, song_titles_attributes: [:id, :song_title, :truck_number, :_destroy]])
     end
+
+    def addmin_user_check
+    if user_signed_in?
+      redirect_to user_path(current_user)
+    end
+  end
 
 end
 

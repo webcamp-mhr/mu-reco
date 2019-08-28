@@ -1,4 +1,6 @@
 class LabelsController < ApplicationController
+
+	before_action :addmin_user_check, only: [:new, :create]
 	
 	def destroy
 	end
@@ -20,4 +22,10 @@ class LabelsController < ApplicationController
 	def label_params
 		params.require(:label).permit(:label_name)
 	end
+
+	def addmin_user_check
+    if user_signed_in?
+      redirect_to user_path(current_user)
+    end
+  end
 end

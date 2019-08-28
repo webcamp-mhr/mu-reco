@@ -1,4 +1,6 @@
 class ArtistsController < ApplicationController
+
+	before_action :caddmin_user_check, only: [:new, :create]
 	
 	def destroy
 	end
@@ -20,4 +22,12 @@ class ArtistsController < ApplicationController
 	def artist_params
 		params.require(:artist).permit(:artist_name)
 	end
+
+	def addmin_user_check
+    if user_signed_in?
+      redirect_to user_path(current_user)
+    end
+  end
+
+
 end

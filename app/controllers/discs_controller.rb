@@ -1,5 +1,7 @@
 class DiscsController < ApplicationController
 
+  before_action :addmin_user_check, only: [:new, :create, :destroy,]
+
 
   def new
     @disc = Disc.new
@@ -21,6 +23,12 @@ class DiscsController < ApplicationController
   private
     def disc_params
       params.require(:disc).permit(:disc_name, song_titles_attributes: [:id, :song_title, :_destroy])
+    end
+
+    def addmin_user_check
+      if user_signed_in?
+        redirect_to user_path(current_user)
+      end
     end
 
 end
