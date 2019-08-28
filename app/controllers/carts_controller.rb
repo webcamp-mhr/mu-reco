@@ -1,5 +1,7 @@
 class CartsController < ApplicationController
 
+	before_action :current_user_check, only: [ :destroy, :update]
+
 	def destroy
 		cart = Cart.find(params[:id])
 		cart.destroy
@@ -45,6 +47,14 @@ class CartsController < ApplicationController
 	def carts_params
 		params.permit(:purchase_quantity)[:carts]
 	end
+
+	def current_user_check
+		cart = Cart.find(params[:id])
+		user = cart.user
+    if user_signed_in? && current_user != user
+      redirect_to user_path(current_user)
+    end
+  end
 
 end
 

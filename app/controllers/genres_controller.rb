@@ -1,5 +1,7 @@
 class GenresController < ApplicationController
 
+	before_action :addmin_user_check, only: [:new, :create]
+
 	def destroy
 	end
 
@@ -21,5 +23,11 @@ class GenresController < ApplicationController
 	def genre_params
 		params.require(:genre).permit(:genre_name)
 	end
+
+	def addmin_user_check
+    if user_signed_in?
+      redirect_to user_path(current_user)
+    end
+  end
 end
 

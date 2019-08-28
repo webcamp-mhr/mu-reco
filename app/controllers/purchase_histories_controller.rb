@@ -2,6 +2,8 @@ class PurchaseHistoriesController < ApplicationController
 
   before_action :check_check, only: [:new]
 
+  before_action :current_user_check, only: [:new, :create]
+
 	def index
 		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order
 	end
@@ -80,4 +82,12 @@ class PurchaseHistoriesController < ApplicationController
           redirect_to carts_path
         end
     end
+
+    def current_user_check
+    history = PurchaseHistory.find(params[:id])
+    user = history.user
+    if user_signed_in? && current_user != user
+      redirect_to user_path(current_user)
+    end
+  end
 end
