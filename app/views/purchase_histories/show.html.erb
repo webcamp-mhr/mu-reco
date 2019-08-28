@@ -1,4 +1,5 @@
 <h2>購入履歴詳細</h2>
+
   <table class="table">
     <thead>
       <tr align="center">
@@ -20,6 +21,10 @@
           <tr>
             <td><%= purchase_product.single_album_name %></td>
             <td><%= attachment_image_tag purchase_product, :jacket_image, :fill, 70, 70, format: 'jpeg', fallback: "no_image.jpg", size:'70x70' %></td>
+            <p>
+              <%= purchase_product.purchase_history.user.user_lastname %>
+              <%= purchase_product.purchase_history.user.user_firstname %>
+            </p>
             <td><%= purchase_product.artist_name %></td>
             <td><%= purchase_product.label_name %></td>
             <td><%= purchase_product.genre_name %></td>
@@ -51,6 +56,10 @@
     <p>出荷済み</p>
   <% else %>
     <p>エラー</p>
+  <% end %>
+  <%= form_for(@purchase_history) do |f| %>
+  <%= f.text_field :delivery_status %>
+  <p><%= f.submit "更新" %></p>
   <% end %>
 
 <p>

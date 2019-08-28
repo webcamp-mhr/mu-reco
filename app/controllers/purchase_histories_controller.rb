@@ -1,6 +1,7 @@
 class PurchaseHistoriesController < ApplicationController
 
   before_action :check_check, only: [:new]
+  before_action :current_user_check, only: [:show]
 
  
 
@@ -17,6 +18,10 @@ class PurchaseHistoriesController < ApplicationController
 	end
 
   def update
+    purchase_history = PurchaseHistory.find(params[:id])
+    if purchase_history.update(purchase_history_params)
+      redirect_to purchase_history_path(purchase_history)
+    end
   end
 
 	def new
@@ -78,8 +83,16 @@ class PurchaseHistoriesController < ApplicationController
     def check_check
       carts = Cart.where(check: 1)
         if carts.count == 0
-          redirect_to carts_path
+          redirect_to carts_path, notice: '何もえらんでないじゃん！ぷぷぷ'
         end
     end
+
+    def current_user_check
+    history = PurchaseHistory.find(params[:id])
+    user = history.user
+    if user_signed_in? && current_user != user
+      redirect_to user_path(current_user)
+    end
+  end
 
 end

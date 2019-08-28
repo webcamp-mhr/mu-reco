@@ -61,20 +61,22 @@
   <%= f.hidden_field :delivery_status, :value => '1' %>
 
   <div>
-    <h4>お届け先の選択</h4>
+    <h4>お届け先住所</h4>
     <% current_user.addresses.each do |address| %>
-      <label>
-        <!-- ラジオボタンが１つしか値を送信できない？ため購入時の選択した住所Idを渡す -->
-        <%= f.radio_button :purchase_address_id, address.id %>
-        <%= address.postcode %> / <%= address.address %>
-      </label>
+      <% if address.address_priority == 1 %>
+        <label>
+          <!-- ラジオボタンが１つしか値を送信できない？ため購入時の選択した住所Idを渡す -->
+          <%= f.radio_button :purchase_address_id, address.id , checked: true%>
+          <%= address.postcode %> / <%= address.address %>
+        </label>
+      <% end %>
     <% end %>
   </div>
 
   <div>
     <h4>支払い選択</h4>
     <label>
-      <%= f.radio_button :payment_status, '1' %> 銀行振込
+      <%= f.radio_button :payment_status, '1', checked: true %> 銀行振込
     </label>
     <label>
       <%= f.radio_button :payment_status, '2' %> クレジットカード

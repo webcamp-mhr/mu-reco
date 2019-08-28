@@ -16,6 +16,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+p {
+		font-size: 20px;
+		font-family: 'HanziPen TC',sans-serif;
+		opacity: 0;
+		margin-top: 7px;
+		display: inline-block;
+		opacity: 0.9;
+		text-decoration:none;
+		color: black;
+	}
 
 .index {
 	width: 100%;
