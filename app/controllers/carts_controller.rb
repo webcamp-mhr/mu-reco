@@ -13,6 +13,8 @@ class CartsController < ApplicationController
 		cart.purchase_quantity = 1
 		if cart.save
 			redirect_to carts_path
+		else
+			redirect_to products_path, notice: 'すでにかごに入ってるよ!おっちょこちょいだなぁ'
 		end
 	end
 
