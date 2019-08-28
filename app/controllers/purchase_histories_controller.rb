@@ -2,7 +2,7 @@ class PurchaseHistoriesController < ApplicationController
 
   before_action :check_check, only: [:new]
 
-  before_action :current_user_check, only: [:new, :create]
+ 
 
 	def index
 		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order
@@ -15,6 +15,9 @@ class PurchaseHistoriesController < ApplicationController
 
 	def edit
 	end
+
+  def update
+  end
 
 	def new
 		@carts = Cart.all
@@ -36,7 +39,6 @@ class PurchaseHistoriesController < ApplicationController
     @purchase_history.purchase_address = current_user.addresses.find(@purchase_history.purchase_address_id).address
     @purchase_history.total_price = 0  #初期値
     @purchase_history.save #一度保存(purchase_history_idに代入する為)
-
 		carts = Cart.all
     carts.each do |cart|
       if cart.check == true && (cart.purchase_quantity <= cart.product.stock_quantity) #チェックがついてる場合 && 購入枚数より在庫の方が多い場合
@@ -67,9 +69,6 @@ class PurchaseHistoriesController < ApplicationController
     end
 	end
 
-	def update
-	end
-
 	private
 
     def purchase_history_params
@@ -83,11 +82,4 @@ class PurchaseHistoriesController < ApplicationController
         end
     end
 
-    def current_user_check
-    history = PurchaseHistory.find(params[:id])
-    user = history.user
-    if user_signed_in? && current_user != user
-      redirect_to user_path(current_user)
-    end
-  end
 end
