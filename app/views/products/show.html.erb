@@ -35,17 +35,20 @@
 			<% else %>
 				<p style="color: red;">売り切れちゃった！</p><br>
 			<% end %>
+
 			<% @product.discs.each do |disc| %>
 				<p><%= disc.disc_name %></p><br>
 			<% end %>
 			<% @product.discs.each do |disc| %>
-				<p>曲名は</p><br>
+				<p>曲名</p><br>
 				<% disc.song_titles.each do |song_title| %>
+				
 					<p>
 						<%= song_title.song_title %>
 					</p><br>
 				<% end %>
 			<% end %>
+
 		</div>
 	</div>
 
