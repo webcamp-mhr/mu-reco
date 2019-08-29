@@ -18,7 +18,6 @@
         </thead>
 
 
-
         <tbody>
 
             <% current_user.carts.each do |cart| %>
@@ -40,7 +39,7 @@
                       <% end %>
                     </td>
                     <td><%= cart.product.price %>円</td>
-                    <td><%= f.number_field :purchase_quantity, min: 1, autofocus: true, :size => "4*2" %> 枚</td>
+                    <td><%= f.number_field :purchase_quantity, min: 1, max: cart.product.stock_quantity ,autofocus: true, :size => "4*2" %> 枚</td>
                     <td><%= link_to "削除", cart_path(cart.id), class: "btn btn-danger", method: :delete %></td>
                   </tr>
                 <% end %>
