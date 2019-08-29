@@ -3,8 +3,6 @@ class PurchaseHistoriesController < ApplicationController
   before_action :check_check, only: [:new]
   before_action :current_user_check, only: [:show]
 
- 
-
 	def index
 		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order
 	end
