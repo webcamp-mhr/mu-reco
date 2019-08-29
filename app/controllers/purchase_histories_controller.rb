@@ -4,6 +4,7 @@ class PurchaseHistoriesController < ApplicationController
   before_action :current_user_check, only: [:show]
 
  
+ 
 
 	def index
 		@purchase_histories = PurchaseHistory.page(params[:page]).reverse_order

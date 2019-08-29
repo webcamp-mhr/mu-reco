@@ -57,14 +57,29 @@
   <% else %>
     <p>エラー</p>
   <% end %>
-  <%= form_for(@purchase_history) do |f| %>
-  <%= f.text_field :delivery_status %>
-  <p><%= f.submit "更新" %></p>
+
+  <% if administrator_signed_in? %>
+    <div>
+      <%= form_for(@purchase_history) do |f| %>
+        <h4>配送ステータス変更</h4>
+        <label>
+          <%= f.radio_button :delivery_status, '1', checked: true %> 受付中
+        </label>
+        <label>
+          <%= f.radio_button :delivery_status, '2' %> 商品準備中
+        </label>
+        <label>
+          <%= f.radio_button :delivery_status, '3' %> 出荷済み
+        </label>
+        <p><%= f.submit "更新" %></p><br>
+      <% end %>
+    </div>
   <% end %>
 
-<p>
-  <%= link_to '戻る', products_path %>
-</p>
+  <p>
+    <%= link_to '戻る', products_path %><br>
+  </p>
+
 
 
 
