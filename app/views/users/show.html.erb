@@ -9,7 +9,7 @@
 			<th>セイ</th>
 			<th>メイ</th>
 			<th>電話番号</th>
-			<th>郵便番号 / 住所(メイン)</th>
+			<th>郵便番号 / 住所一覧</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -25,7 +25,7 @@
 					<!-- 優先番号「1」のメイン住所のみ表示 -->
 					<% if address.address_priority == 1 %>
 				  	<%= address.postcode %>
-				  	<%= address.address %>
+				  	<%= address.address %><br>
 				  <% end %>
 				<% end %>
 			</td>
