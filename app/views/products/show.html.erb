@@ -27,7 +27,7 @@
 					<% if @product.stock_quantity <= 10 %>
 						<p>販売中(残りわずか	！売り切れ御免)</p><br>
 					<% else %>
-						<p>販売中</p><br>
+						<p style="color :red">販売中</p><br>
 					<% end %>
 				<% elsif @product.sales_status == false %>
 					<p style="color: red;">販売停止中です。ごめんなさい。</p><br>
@@ -36,14 +36,12 @@
 				<p style="color: red;">売り切れちゃった！</p><br>
 			<% end %>
 			<% @product.discs.each do |disc| %>
-				<p><%= disc.disc_name %></p><br>
-			<% end %>
-			<% @product.discs.each do |disc| %>
+				<p style="border-bottom: solid"><%= disc.disc_name %></p><br>
 				<p>曲名は</p><br>
 				<% disc.song_titles.each do |song_title| %>
-					<p>
+					<li style="list-style-type: disc">
 						<%= song_title.song_title %>
-					</p><br>
+					</li><br>
 				<% end %>
 			<% end %>
 		</div>
