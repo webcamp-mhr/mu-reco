@@ -22,8 +22,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     # 税込価格で表示させるため8%の税をかける
-    @product.price *= 1.08
-    if @product.save!
+     if @product.price != nil
+      @product.price *= 1.08
+    end
+    if @product.save
       redirect_to products_path
     else
       render 'new'
