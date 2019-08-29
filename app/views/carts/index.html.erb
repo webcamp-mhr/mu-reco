@@ -46,7 +46,9 @@
                 <% end %>
                 </td>
             <% end %>
-            <p><%= submit_tag '購入確認' %></p>
+            <% if current_user.carts.count > 0 %>
+              <p><%= submit_tag '購入確認' %></p>
+            <% end %>
             </tr>
           </thead>
 
