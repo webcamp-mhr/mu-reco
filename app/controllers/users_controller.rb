@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
 	before_action :current_user_check, only: [:edit, :update, :destroy]
 
+	def admin
+	end
+
 	def index
     @users = User.all.page(params[:page]).reverse_order
 
