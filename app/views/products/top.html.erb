@@ -4,9 +4,3 @@
 <p>最近はストリーミングで音楽を楽しむことも多くなってきたかと思います。</p><br>
 <p>そんな時代にあえて、CDで音楽を楽しみませんか？</p><br>
 <p>それもジャケ買いで！！</p><br>
-
-<% if administrator_signed_in? || user_signed_in? %>
-	<p>楽しんでいただけてますか？</p>
-<% else %>
-	<p><%= link_to '管理者用ログイン', new_administrator_session_path %></p>
-<% end %>

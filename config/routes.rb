@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 root 'products#top'
 
+get 'kajikaji/nosunosu' => 'users#admin'
+
 devise_for :administrators
 devise_for :users, controllers: { registrations: 'users/registrations' }
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,6 +1,6 @@
 class ArtistsController < ApplicationController
 
-	before_action :caddmin_user_check, only: [:new, :create]
+	before_action :addmin_user_check, only: [:new, :create]
 	
 	def destroy
 	end

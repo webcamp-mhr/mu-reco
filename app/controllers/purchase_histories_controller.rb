@@ -2,11 +2,7 @@ class PurchaseHistoriesController < ApplicationController
 
   before_action :check_check, only: [:new]
   before_action :current_user_check, only: [:show]
-
-
-
- 
- 
+  before_action :nil_check, only: [:new]
 
 
 	def index
@@ -89,6 +85,13 @@ class PurchaseHistoriesController < ApplicationController
         if carts.count == 0
           redirect_to carts_path, notice: '何もえらんでないじゃん！ぷぷぷ'
         end
+    end
+
+    def nil_check
+      carts = Cart.all
+      if current_user.carts == nil
+        redirect_to carts_path, notice: 'カゴからっぽじゃん！ぷぷぷ'
+      end
     end
 
     def current_user_check
