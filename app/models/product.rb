@@ -14,7 +14,7 @@ class Product < ApplicationRecord
   validates :single_album_name, presence: true
   validates :price, presence: true
   validates :stock_quantity, presence: true
-  validates :sales_status, presence: true
+  validates :sales_status, inclusion: {in: [true, false]}
 
   # 親子関係
   accepts_nested_attributes_for :discs, reject_if: :all_blank, allow_destroy: true
