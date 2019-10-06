@@ -10,7 +10,7 @@
 				<%= @product.artist.artist_name %>
 				です!
 			</p>
-			<%= attachment_image_tag @product, :jacket_image, :fill, 900, 900, format: 'jpeg', fallback: "no_image.jpg", size:'500x500', style: "border-radius: 6px;" %><br>
+			<%= attachment_image_tag @product, :jacket_image, :fill, 900, 900, format: 'jpeg', fallback: "/images/no_image.jpg", size:'500x500', style: "border-radius: 6px;" %><br>
 			<p>
 				ジャンルは
 				<%= @product.genre.genre_name %>

@@ -21,7 +21,7 @@
     <tbody>
       <tr>
         <td><%= purchase_product.single_album_name %></td>
-        <td><%= attachment_image_tag @product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></td>
+        <td><%= attachment_image_tag @product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "/images/no_image.jpg", size:'100x100' %></td>
         <td><%= purchase_product.artist_name %></td>
         <td><%= purchase_product.label_name %></td>
         <td><%= purchase_product.genre_name %></td>

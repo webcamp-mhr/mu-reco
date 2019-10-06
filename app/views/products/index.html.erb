@@ -11,7 +11,7 @@
 	<div class="index">
 		<%= link_to product_path(product) do %>
 		<span class="image">
-			<%= attachment_image_tag product, :jacket_image, :fill, 1200, 1200, format: 'jpeg', fallback: "no_image.jpg", size:'740x740', style: "border-radius: 6px;"%><br>
+			<%= attachment_image_tag product, :jacket_image, :fill, 1200, 1200, format: 'jpeg', fallback: "/images/no_image.jpg", size:'740x740', style: "border-radius: 6px;"%><br>
 		</span>
 			<p class="name">
 				<%=  product.single_album_name %>
