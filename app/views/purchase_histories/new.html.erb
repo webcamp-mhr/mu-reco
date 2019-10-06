@@ -21,7 +21,7 @@
     <tbody>
         <% if cart.check == true %>
           <tr>
-            <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
+            <td><%= attachment_image_tag cart.product, :jacket_image, :fill, 100, 100, format: 'jpeg', fallback: "/images/no_image.jpg", size:'50x50' %></td>
             <td><%= cart.product.single_album_name %></td>
             <td><%= cart.product.artist.artist_name %></td>
             <td><%= cart.purchase_quantity %>枚</td>
